@@ -13,6 +13,8 @@ Most venues force some version of a snapshot-plus-delta model. You begin from a 
 
 Representation choices matter here. Some systems need full depth. Some need only shallow depth around the top of book. Some need per-level price and size information. Others may eventually care about queue-level detail. There is no universally correct answer. The right choice depends on what the strategy and execution logic actually consume. For a large number of learning and early-production systems, compact price-level structures and derived top-of-book summaries are far more valuable than overly ambitious attempts to mirror every subtle exchange detail. A system becomes stronger when the data structure matches the decision problem rather than an abstract idea of completeness.
 
+That choice also has performance consequences. Many workloads care disproportionately about the inside of book and only a limited band of nearby depth. In those cases, the most important optimization target is often not elegant asymptotic complexity across the full ladder, but cheap updates and reads near the top of book with predictable cache behavior. This is one reason compact, contiguous, top-of-book-friendly structures often outperform more theoretically general representations in actual trading paths.
+
 Another important insight is that strategy logic rarely wants raw book mutations directly. It usually wants derived quantities: spread, midprice, microprice, imbalance, local volatility proxies, or signs of liquidity withdrawal and sweep activity. This suggests a healthy division of labor. The book engine should own reconstruction. The signal layer should own interpretation. When those layers collapse into each other, debugging becomes harder because you can no longer tell whether poor behavior came from faulty market-state maintenance or faulty strategy reasoning.
 
 Replay is one of the strongest arguments for investing in a disciplined book engine early. A book that can be driven deterministically from recorded event streams becomes useful across research, debugging, benchmarking, and regression testing. That is not secondary value. It is what allows the same component to teach you what happened yesterday, validate what changed today, and support what trades tomorrow. In that sense, the order-book engine is not just a runtime module. It is one of the central intellectual assets of the whole platform.
@@ -21,6 +23,7 @@ The book note is therefore simple to summarize but difficult to implement well: 
 
 Related:
 
+- [[19 - Matching Engines, Queue Priority, and Order Amend Semantics]]
 - [[31 - Market Data Ingestion Deep Dive]]
 - [[42 - Research and Backtesting Systems]]
 - [[08 - Build Projects]]

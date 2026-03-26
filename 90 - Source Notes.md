@@ -140,3 +140,4 @@ Related:
 - [[26 - Building a Low-Latency Trading Engine]]
 - [[27 - Exchange Protocols and Connectivity]]
 - [[91 - Developing High-Frequency Trading Systems (Book Notes)]]
+- [[92 - Developing High-Frequency Trading Systems (Full Research)]]

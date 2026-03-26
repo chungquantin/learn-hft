@@ -128,6 +128,7 @@ What changes is that exchange heterogeneity, operational instability, and cloud-
 Related:
 
 - [[05 - Exchange Architecture]]
+- [[15 - Benchmarking and Tick-to-Trade Measurement]]
 - [[12 - Low-Latency Logging and Telemetry]]
 - [[26 - Building a Low-Latency Trading Engine]]
 - [[27 - Exchange Protocols and Connectivity]]

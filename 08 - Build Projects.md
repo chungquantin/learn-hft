@@ -57,10 +57,15 @@ Learn:
 - event-driven design
 - realistic PnL accounting
 - inventory tracking
+- sensitivity analysis for latency and queue assumptions
 
 Why this project matters:
 
 This is where many optimistic ideas die, which is healthy. If an idea cannot survive realistic execution modeling, it is better to learn that in a backtester than in a live account.
+
+Add one explicit requirement:
+
+- the backtester should let you vary latency, stale-state windows, and fill assumptions instead of hard-coding one optimistic scenario
 
 ## Project 4: Paper trading engine
 
@@ -97,6 +102,22 @@ Why this project matters:
 
 The notebook turns the vault from static notes into a research instrument. Over time, this becomes more valuable than a pile of disconnected code experiments.
 
+## Project 6: Latency and profiling harness
+
+Goal:
+Build a repeatable benchmark harness for parsers, queues, book updates, and replay-driven end-to-end latency.
+
+Learn:
+
+- microbenchmark discipline
+- tail-latency measurement
+- warm versus cold path behavior
+- identifying real hot paths before optimization
+
+Why this project matters:
+
+Many beginners start tuning before they know what is slow. This project forces you to measure first, distinguish function-level cost from system-level cost, and build the habit of validating optimization claims.
+
 ## Suggested order of seriousness
 
 You can think of the projects as maturity levels:
@@ -106,6 +127,7 @@ You can think of the projects as maturity levels:
 3. realistic backtest
 4. paper trading
 5. research discipline
+6. performance discipline
 
 Do not rush past the early projects. Most of the important engineering lessons show up before live deployment.
 

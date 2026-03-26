@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "14 - Low-Latency Systems Foundations.md",
+                "file": "00 - Roadmap.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "14 - Low-Latency Systems Foundations"
+              "title": "00 - Roadmap"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "14 - Low-Latency Systems Foundations.md",
+                "file": "00 - Roadmap.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 14 - Low-Latency Systems Foundations"
+              "title": "Backlinks for 00 - Roadmap"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "14 - Low-Latency Systems Foundations.md",
+                "file": "00 - Roadmap.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 14 - Low-Latency Systems Foundations"
+              "title": "Outgoing links from 00 - Roadmap"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "14 - Low-Latency Systems Foundations.md",
+                "file": "00 - Roadmap.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 14 - Low-Latency Systems Foundations"
+              "title": "Outline of 00 - Roadmap"
             }
           }
         ]
@@ -185,10 +185,17 @@
   },
   "active": "3c27dc5216f04251",
   "lastOpenFiles": [
-    "91 - Developing High-Frequency Trading Systems (Book Notes).md",
+    "19 - Matching Engines, Queue Priority, and Order Amend Semantics.md",
+    "18 - Time and Timestamp Semantics.md",
+    "17 - Crypto Exchange Reality.md",
+    "16 - Language Roles in an HFT Stack.md",
+    "15 - Benchmarking and Tick-to-Trade Measurement.md",
+    "06 - Strategy Research.md",
     "00 - Roadmap.md",
-    "14 - Low-Latency Systems Foundations.md",
     "README.md",
+    "14 - Low-Latency Systems Foundations.md",
+    "92 - Developing High-Frequency Trading Systems (Full Research).md",
+    "91 - Developing High-Frequency Trading Systems (Book Notes).md",
     "46 - Order Flow and Event-Driven Trading.md",
     "29 - Arbitrage and Lead-Lag Deep Dive.md",
     "28 - Market Making Deep Dive.md",
@@ -203,13 +210,6 @@
     "40 - Data Systems Hub.md",
     "53 - Research Dashboards and Visualization.md",
     "52 - Monitoring, Alerting, and Incident Response.md",
-    "51 - Operator UI and Control Plane.md",
-    "50 - Frontend and Operator Systems Hub.md",
-    "45 - Analytics and Post-Trade Review.md",
-    "44 - Data Quality and Lineage.md",
-    "43 - Feature Engineering and Labeling.md",
-    "42 - Research and Backtesting Systems.md",
-    "36 - Reliability, Failure Modes, and Recovery.md",
-    "35 - Service Boundaries and Process Topology.md"
+    "51 - Operator UI and Control Plane.md"
   ]
 }

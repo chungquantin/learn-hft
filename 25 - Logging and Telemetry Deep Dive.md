@@ -17,10 +17,18 @@ It is also important to widen the concept beyond logs. In these systems, queue d
 
 This leads naturally to the idea of observability tiers. At the bottom are cheap counters and health metrics. Above that come structured timing events and low-cost flow metadata. Above that may come sampled logs. Only in more exceptional circumstances should detailed trace-like output be enabled, and even then it should remain possible to degrade or disable it. If the telemetry path can materially distort trading behavior or make the engine less safe, then observability has become part of the risk surface rather than a tool for understanding it.
 
+Performance measurement deserves to be treated as part of telemetry design rather than as a separate afterthought. If you only measure after the system feels slow, you are already reacting too late. Good low-latency platforms preserve a small set of continuously useful measurements: per-stage latency, queue wait, ingest-to-decision time, decision-to-ack time, fill latency, dropped-event counts, and data-staleness indicators. These metrics are useful because they map to specific failure and performance hypotheses instead of merely sounding technical.
+
+Another important distinction is between software timestamps and hardware-adjacent timestamps. Software timestamps are often enough for understanding component flow inside one process or one host. But some questions, especially network-path questions, may require stronger timing sources such as NIC or switch timestamping, mirrored traffic capture, or carefully linked outbound and inbound events. The principle is not that every system must adopt heavy instrumentation immediately. The principle is that timing truth has layers, and the observability model should respect which layer is needed for which question.
+
+It is also worth treating statistics generation as a first-class design problem. Trading systems often care less about a handful of spectacular trades than about the aggregate behavior of thousands of small decisions. That means online summaries such as rolling latency percentiles, reject-rate changes, queue-lag trends, and per-strategy health statistics can be more operationally valuable than long textual logs. Logs explain episodes. Statistics reveal drift.
+
 The best practical summary is that good observability in HFT is not about adding more logs. It is about building a low-interference explanatory channel that helps the system reveal latency, causality, and failure without becoming a dominant source of the very problems it is meant to explain.
 
 Related:
 
 - [[12 - Low-Latency Logging and Telemetry]]
+- [[18 - Time and Timestamp Semantics]]
 - [[24 - Queues, Ring Buffers, and Backpressure]]
 - [[26 - Building a Low-Latency Trading Engine]]
+- [[52 - Monitoring, Alerting, and Incident Response]]

@@ -25,9 +25,23 @@ This is also where the async versus dedicated-thread question becomes practical.
 
 All of this converges into a simple principle: the hot path should do less. It should parse the event, update local state, compute the decision that matters, and hand off what comes next. It should not casually format strings, allocate arbitrarily, rebuild large structures, or drag observability and persistence into the same timing budget. Telemetry matters. Logging matters. Audit matters. But those belong to side paths designed not to distort the thing they are observing.
 
+The language-boundary question matters here too. In many real stacks, Rust is not the only language. Python may own research notebooks, feature analysis, orchestration, and offline modeling. A compiled language owns the hot path. The important point is not ideological purity. It is choosing which layer needs ergonomics and which layer needs tight control over latency, memory, and concurrency. Rust fits especially well when you want one compiled language that can stay honest about ownership and data movement without inheriting garbage-collector risk.
+
 Rust's `unsafe` facilities fit into the same philosophy. Unsafe code is not forbidden, but it is a debt instrument. It may be the right choice for some lock-free structures, FFI boundaries, or extremely tight data-path optimizations. But the correct order is safe Rust first, benchmarking second, and unsafe only when the bottleneck is measured and the invariants are explicit. Otherwise the codebase gradually stops being "safe Rust with a few sharp tools" and starts becoming "C++ with better branding."
 
 Benchmarking itself deserves skepticism. Microbenchmarks are useful, but only if they reflect realistic data, realistic branch behavior, realistic memory warmth, and the right latency metric. Measuring only average throughput is an easy way to miss the problem you actually care about. Good benchmarking in this domain eventually expands from function-level timing to component benches, replay-driven system tests, and end-to-end latency profiling under load.
+
+A useful benchmarking ladder in a Rust HFT project looks something like this:
+
+1. Verify correctness and determinism first.
+2. Run microbenchmarks on parsers, queues, and data structures.
+3. Run component benchmarks with realistic message mixes and warm/cold conditions.
+4. Run replay-driven benchmarks that include sequencing, state transitions, and telemetry handoff.
+5. Run end-to-end latency measurements on the actual topology you intend to use.
+
+Each level answers a different question. Microbenchmarks tell you whether a small implementation choice is expensive. Replay and end-to-end runs tell you whether the system shape is expensive. Confusing those levels is one reason teams optimize code that was never on the real critical path.
+
+One final practical lesson is to distrust "optimization by folklore." Kernel bypass, lock-free structures, thread pinning, custom allocators, and unsafe data-path tricks are all real tools. But none of them should be adopted because they sound like HFT. They should be adopted because a measured bottleneck, on your workload and topology, says they buy something worth their complexity.
 
 If there is one deeper lesson to internalize, it is this: Rust matters in HFT not because it is simply fast, but because it forces explicit choices about ownership, mutability, allocation, and concurrency. Those choices are already the real design problems. Rust just makes them harder to ignore.
 

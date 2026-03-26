@@ -27,4 +27,5 @@ Practical subtopics:
 - [[05 - Exchange Architecture]]
 - [[07 - Risk Management]]
 - [[06 - Strategy Research]]
+- [[17 - Crypto Exchange Reality]]
 - [[90 - Source Notes]]

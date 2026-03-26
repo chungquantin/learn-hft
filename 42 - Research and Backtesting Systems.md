@@ -13,12 +13,28 @@ Replay is often more trustworthy than imaginative simulation because it forces t
 
 Backtesting should therefore be thought of as a realism discipline. It should preserve fees, slippage, queue-position assumptions, latency constraints, and invalid-state behavior wherever possible. It should make it painful to cheat unintentionally. A backtest that looks modest but respects reality is far more valuable than one that looks brilliant while silently assuming impossible execution.
 
+This is also where language roles become easier to reason about. Research systems often benefit from Python because iteration speed, data tooling, and analytical ergonomics matter. Production systems often benefit from a compiled language because timing behavior, memory layout, and concurrency control matter. The mistake is not using multiple languages. The mistake is allowing the seam between them to become semantically inconsistent. The safest pattern is to keep event models, timestamps, identifiers, and execution assumptions aligned across both worlds even if the implementation languages differ.
+
+Benchmarking belongs in research infrastructure too. It is not only a production concern. If your replay engine cannot tell you how latency assumptions, queueing assumptions, or execution delays change outcomes, then your research environment is still pretending that system cost is irrelevant. A mature research stack therefore measures not only PnL but also sensitivity to timing, stale-state windows, and execution friction.
+
 Strong research infrastructure also supports repeated comparison. It should let you rerun the same experiment deterministically, sweep parameters, slice regimes, extract features, and attribute performance. That last point is especially important. If a strategy makes money, you want to know whether the source was genuine signal, favorable regime luck, unrealistic execution assumptions, hidden risk concentration, or something else entirely. Without attribution, performance numbers remain numerically real but intellectually weak.
+
+One helpful way to structure research validation is to ask progressively harsher questions:
+
+1. Did the idea survive with clean replay and correct accounting?
+2. Did it survive realistic fees and spread costs?
+3. Did it survive latency and queue-position assumptions?
+4. Did it survive bad states such as feed gaps, stale marks, or delayed acknowledgements?
+5. Did it still make sense after attribution by regime, venue condition, and execution quality?
+
+That sequence is useful because it turns the backtest from a persuasion tool into a filtering tool.
 
 If there is a single theme to remember here, it is that research systems are not there to flatter hypotheses. They are there to expose them to enough reality that only robust ideas survive.
 
 Related:
 
+- [[18 - Time and Timestamp Semantics]]
 - [[31 - Market Data Ingestion Deep Dive]]
 - [[32 - Order Book Engine Deep Dive]]
+- [[41 - Data Collection and Storage]]
 - [[43 - Feature Engineering and Labeling]]

@@ -17,12 +17,28 @@ This leads to one of the most important principles in ingestion design: never pr
 
 Timestamping is another place where weak designs create long-term confusion. Ingestion should not collapse exchange event time, local receive time, and internal publish time into a single field called `timestamp`. Those fields answer different questions. Exchange time helps reconstruct market chronology. Local receive time helps reason about transport and intake latency. Internal publish time helps understand how the event moved through the engine. If these distinctions are blurred early, later debugging becomes much harder because replay, latency analysis, cross-venue alignment, and postmortems all start from a damaged time model.
 
+The physical packet path also matters more than it first appears. Market-data ingestion is not only a parser sitting at the edge of the codebase. It is the first software layer after the NIC, the kernel or bypass stack, interrupt delivery, buffer ownership, and thread scheduling. That means packet-handling design should respect where the NIC is attached, which CPU the ingest thread runs on, how interrupts are placed, and whether the receive path is suffering avoidable cross-socket traffic. These details are easy to classify as infrastructure trivia until they show up as jitter or burst loss.
+
+It also helps to distinguish external connectivity from internal distribution. The external feed is the venue-facing stream that carries market truth into the system. Internal distribution is what your own platform does with that truth after receipt. Those are related but different problems. External handling is constrained by venue protocol and transport behavior. Internal handling is constrained by your own topology choices, queue semantics, and service boundaries. Mixing them conceptually makes diagnosis harder because a problem in one layer can look like a problem in the other.
+
+For that reason, good ingestion notes should record not only payload semantics but also transport and continuity semantics:
+
+- whether the venue uses snapshot plus deltas or independent updates
+- whether sequence numbers are global, per-channel, or absent
+- whether checksums exist and what they actually guarantee
+- whether heartbeats imply continuity or only liveness
+- what reconnect means for subscription and book validity
+- what timeout should trigger invalidation rather than patience
+
+That kind of protocol knowledge becomes part of the engine's operating memory. Without it, the code may still compile and the feed may still parse, but the platform will not actually know what kind of truth it is consuming.
+
 Good ingestion systems therefore behave conservatively. They are suspicious rather than optimistic. They encode explicit invariants such as sequence monotonicity, symbol mapping consistency, checksum validity when available, and known subscription state after reconnect. They alarm not because every anomaly is fatal, but because the system must know the moment data stops being trustworthy. Ingestion is not rewarded for being clever. It is rewarded for being boring, strict, and honest.
 
 If you want a compact way to remember the role of ingestion, use this: its job is not to get data in quickly at any cost. Its job is to make sure that every downstream decision is built on an event stream that deserves to be believed.
 
 Related:
 
+- [[18 - Time and Timestamp Semantics]]
 - [[32 - Order Book Engine Deep Dive]]
 - [[36 - Reliability, Failure Modes, and Recovery]]
 - [[41 - Data Collection and Storage]]

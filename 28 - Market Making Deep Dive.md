@@ -11,9 +11,13 @@ The spread is therefore only the visible source of gross opportunity. Net opport
 
 Queue position is central for this reason. In a passive strategy, you do not merely choose a price. You choose a place in line. That means expected value depends not only on the quoted spread, but on how likely your order is to execute before the market reprices, how often competing liquidity joins ahead of you, and how often the fill you do get is a sign that better-informed traders wanted out. Queue position turns a visible book into a probabilistic one.
 
+Venue rules make this even sharper. On many venues, modifying a quote can reset or worsen queue priority. A price change almost always does. A size change may as well. This means a maker is constantly balancing quote freshness against queue ownership. If you refresh too eagerly, you may preserve theoretical quote quality while repeatedly throwing away the line position that made passive execution attractive in the first place.
+
 This is why adverse selection sits near the heart of market making. A maker wants fills, but not every fill is beneficial. Some fills happen because uninformed flow happens to meet your quote. Others happen because someone faster or better informed is happy to trade against you just before price moves against your position. The art of market making is largely the art of distinguishing between these two environments quickly enough that your quoting behavior adapts.
 
 Inventory control is the next major force. A maker that always quotes symmetrically regardless of inventory is usually pretending that exposure is someone else's problem. In reality, inventory changes what kind of fills you want, how aggressively you should quote, and whether spread capture is still worth pursuing. Market-making systems often earn money on some trades and give it back because inventory was allowed to drift into the wrong market regime.
+
+Fees and rebates belong in the same decision loop. A quote is not attractive simply because it sits at the touch. The realized economics depend on maker fees or rebates, the chance of actually getting filled, the probability that the fill is toxic, and the cost of cleaning up the resulting inventory. Venue-specific fee schedules and market-maker programs therefore shape strategy quality more than beginners often expect.
 
 This makes market making a strategy about balance. You are balancing fill probability against quote quality, inventory against opportunity, spread capture against adverse selection, and persistence against caution. In perpetual markets, funding and liquidation risk add another layer. A strategy that looks acceptable in spot terms may become much less attractive if inventory is expensive to carry or more dangerous to finance.
 
@@ -25,5 +29,6 @@ Related:
 
 - [[04 - Market Microstructure]]
 - [[06 - Strategy Research]]
+- [[19 - Matching Engines, Queue Priority, and Order Amend Semantics]]
 - [[33 - Execution Management Deep Dive]]
 - [[45 - Analytics and Post-Trade Review]]
