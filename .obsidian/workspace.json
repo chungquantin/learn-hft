@@ -1,0 +1,215 @@
+{
+  "main": {
+    "id": "9600749b37b9d6ec",
+    "type": "split",
+    "children": [
+      {
+        "id": "e503337ec065a865",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3c27dc5216f04251",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "14 - Low-Latency Systems Foundations.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "14 - Low-Latency Systems Foundations"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b880957d7a86aef8",
+    "type": "split",
+    "children": [
+      {
+        "id": "60cb7eadbf2e1b22",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "59d4bf300f97ad96",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "e88df9f0cd11ecae",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8cf38ef6a72758ce",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e5144afcae63af88",
+    "type": "split",
+    "children": [
+      {
+        "id": "7738d6288d8637cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "adcd03472a66fae9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "14 - Low-Latency Systems Foundations.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 14 - Low-Latency Systems Foundations"
+            }
+          },
+          {
+            "id": "2a11bc47daee1327",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "14 - Low-Latency Systems Foundations.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 14 - Low-Latency Systems Foundations"
+            }
+          },
+          {
+            "id": "ae207645fb48d386",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "48772d30ac2cb9e4",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "d13f089ce95a859c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "14 - Low-Latency Systems Foundations.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 14 - Low-Latency Systems Foundations"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3c27dc5216f04251",
+  "lastOpenFiles": [
+    "91 - Developing High-Frequency Trading Systems (Book Notes).md",
+    "00 - Roadmap.md",
+    "14 - Low-Latency Systems Foundations.md",
+    "README.md",
+    "46 - Order Flow and Event-Driven Trading.md",
+    "29 - Arbitrage and Lead-Lag Deep Dive.md",
+    "28 - Market Making Deep Dive.md",
+    "27 - Exchange Protocols and Connectivity.md",
+    "02 - Rust for HFT.md",
+    "30 - Backend Systems Hub.md",
+    "25 - Logging and Telemetry Deep Dive.md",
+    "21 - Rust for HFT Deep Dive.md",
+    "26 - Building a Low-Latency Trading Engine.md",
+    "54 - UX for Trading and Operations.md",
+    "41 - Data Collection and Storage.md",
+    "40 - Data Systems Hub.md",
+    "53 - Research Dashboards and Visualization.md",
+    "52 - Monitoring, Alerting, and Incident Response.md",
+    "51 - Operator UI and Control Plane.md",
+    "50 - Frontend and Operator Systems Hub.md",
+    "45 - Analytics and Post-Trade Review.md",
+    "44 - Data Quality and Lineage.md",
+    "43 - Feature Engineering and Labeling.md",
+    "42 - Research and Backtesting Systems.md",
+    "36 - Reliability, Failure Modes, and Recovery.md",
+    "35 - Service Boundaries and Process Topology.md"
+  ]
+}
