@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 - Roadmap.md",
+                "file": "14 - Low-Latency Systems Foundations.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00 - Roadmap"
+              "title": "14 - Low-Latency Systems Foundations"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00 - Roadmap.md",
+                "file": "05 - Exchange Architecture.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 00 - Roadmap"
+              "title": "Backlinks for 05 - Exchange Architecture"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "00 - Roadmap.md",
+                "file": "05 - Exchange Architecture.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 00 - Roadmap"
+              "title": "Outgoing links from 05 - Exchange Architecture"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00 - Roadmap.md",
+                "file": "05 - Exchange Architecture.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 00 - Roadmap"
+              "title": "Outline of 05 - Exchange Architecture"
             }
           }
         ]
@@ -185,31 +185,31 @@
   },
   "active": "3c27dc5216f04251",
   "lastOpenFiles": [
+    "skills-lock.json",
+    "92 - Developing High-Frequency Trading Systems (Full Research).md",
+    "05 - Exchange Architecture.md",
+    "11 - Seqlocks.md",
+    "21 - Rust for HFT Deep Dive.md",
+    "20 - Detailed Guides.md",
+    "00 - Roadmap.md",
+    "README.md",
+    "32 - Order Book Engine Deep Dive.md",
+    "33 - Execution Management Deep Dive.md",
+    "34 - Risk Engine Deep Dive.md",
+    "28 - Market Making Deep Dive.md",
+    "24 - Queues, Ring Buffers, and Backpressure.md",
+    "26 - Building a Low-Latency Trading Engine.md",
+    "30 - Backend Systems Hub.md",
+    "25 - Logging and Telemetry Deep Dive.md",
+    "02 - Rust for HFT.md",
     "19 - Matching Engines, Queue Priority, and Order Amend Semantics.md",
     "18 - Time and Timestamp Semantics.md",
     "17 - Crypto Exchange Reality.md",
     "16 - Language Roles in an HFT Stack.md",
     "15 - Benchmarking and Tick-to-Trade Measurement.md",
     "06 - Strategy Research.md",
-    "00 - Roadmap.md",
-    "README.md",
     "14 - Low-Latency Systems Foundations.md",
-    "92 - Developing High-Frequency Trading Systems (Full Research).md",
     "91 - Developing High-Frequency Trading Systems (Book Notes).md",
-    "46 - Order Flow and Event-Driven Trading.md",
-    "29 - Arbitrage and Lead-Lag Deep Dive.md",
-    "28 - Market Making Deep Dive.md",
-    "27 - Exchange Protocols and Connectivity.md",
-    "02 - Rust for HFT.md",
-    "30 - Backend Systems Hub.md",
-    "25 - Logging and Telemetry Deep Dive.md",
-    "21 - Rust for HFT Deep Dive.md",
-    "26 - Building a Low-Latency Trading Engine.md",
-    "54 - UX for Trading and Operations.md",
-    "41 - Data Collection and Storage.md",
-    "40 - Data Systems Hub.md",
-    "53 - Research Dashboards and Visualization.md",
-    "52 - Monitoring, Alerting, and Incident Response.md",
-    "51 - Operator UI and Control Plane.md"
+    "46 - Order Flow and Event-Driven Trading.md"
   ]
 }
