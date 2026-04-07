@@ -1,26 +1,42 @@
-use std::collections::VecDeque;
+//! Matching logic that enforces price-time priority.
+//!
+//! Price priority is delegated to the heap-backed order book.
+//! Time priority is preserved by FIFO queues per price level.
+//!
+//! # Design rationale
+//! - Keep this module free from networking/persistence for predictable hot-path latency.
+//! - Emit immutable events so downstream systems share one factual stream.
+//! - Return next sequence cursor to avoid hidden global state.
+//!
+//! # Example (conceptual)
+//! ```text
+//! Incoming Buy 5 @ 101
+//! Book asks: 101:[2,3], 102:[4]
+//! Result: trades at 101 for 2 then 3, residual 0, no resting insert.
+//! ```
 
 use crate::command::OrderCommand;
 use crate::event::{ExecutionEvent, ExecutionEventKind};
 use crate::orderbook::{OrderBook, RestingOrder};
 use crate::types::Side;
 
-fn pop_empty_level(
-    levels: &mut std::collections::BTreeMap<u64, VecDeque<RestingOrder>>,
-    price: u64,
-) {
-    if levels.get(&price).is_some_and(|q| q.is_empty()) {
-        let _ = levels.remove(&price);
-    }
-}
-
+/// Matches one command against the order book and emits deterministic events.
+///
+/// Design intent:
+/// - this function is pure matching+state transition logic
+/// - transport, persistence, and network I/O are intentionally excluded
+///   to keep hot-path latency predictable
 pub fn match_command(
     seq_start: u64,
     book: &mut OrderBook,
     cmd: OrderCommand,
 ) -> (u64, Vec<ExecutionEvent>) {
+    // Local sequence cursor. We advance this as events are emitted and return it
+    // so caller can persist monotonic ordering across commands.
     let mut seq = seq_start;
+    // Remaining quantity tracks partial fills in a single command lifecycle.
     let mut remaining = cmd.quantity;
+    // Small pre-allocation avoids early reallocation for common event counts.
     let mut events = Vec::with_capacity(8);
 
     events.push(ExecutionEvent {
@@ -37,19 +53,19 @@ pub fn match_command(
             break;
         }
 
-        let (cross_price, crosses) = match cmd.side {
+        let crosses = match cmd.side {
             Side::Buy => {
                 if let Some(best_ask) = book.best_ask() {
-                    (best_ask, best_ask <= cmd.price_ticks)
+                    best_ask <= cmd.price_ticks
                 } else {
-                    (0, false)
+                    false
                 }
             }
             Side::Sell => {
                 if let Some(best_bid) = book.best_bid() {
-                    (best_bid, best_bid >= cmd.price_ticks)
+                    best_bid >= cmd.price_ticks
                 } else {
-                    (0, false)
+                    false
                 }
             }
         };
@@ -58,17 +74,14 @@ pub fn match_command(
             break;
         }
 
-        let levels = match cmd.side {
-            Side::Buy => &mut book.asks,
-            Side::Sell => &mut book.bids,
+        let level_pop = match cmd.side {
+            // Buy order consumes asks.
+            Side::Buy => book.pop_best_ask_order(),
+            // Sell order consumes bids.
+            Side::Sell => book.pop_best_bid_order(),
         };
 
-        let Some(level_queue) = levels.get_mut(&cross_price) else {
-            continue;
-        };
-
-        let Some(mut top) = level_queue.pop_front() else {
-            pop_empty_level(levels, cross_price);
+        let Some((book_price, mut top)) = level_pop else {
             continue;
         };
 
@@ -80,24 +93,32 @@ pub fn match_command(
             seq,
             order_id: cmd.order_id,
             kind: ExecutionEventKind::Trade,
-            price_ticks: cross_price,
+            price_ticks: book_price,
             quantity: traded,
         });
         seq += 1;
 
         if top.quantity > 0 {
-            level_queue.push_front(top);
+            let resting_side = match cmd.side {
+                Side::Buy => Side::Sell,
+                Side::Sell => Side::Buy,
+            };
+            // Requeue with same time priority to preserve original queue precedence.
+            book.requeue_front(resting_side, book_price, top);
         }
-        pop_empty_level(levels, cross_price);
     }
 
     if remaining > 0 {
+        // Residual liquidity becomes resting order on incoming side.
+        // Time priority will be assigned by order book on insertion.
         book.add_resting(
             cmd.side,
             RestingOrder {
                 order_id: cmd.order_id,
                 price_ticks: cmd.price_ticks,
                 quantity: remaining,
+                // `0` means order book assigns monotonic time key at insert time.
+                time_priority: 0,
             },
         );
         events.push(ExecutionEvent {
