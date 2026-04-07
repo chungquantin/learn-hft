@@ -5,8 +5,37 @@
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [],
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "file:\"65 - HFT Rust System Design Master Note\" OR file:\"66 - HFT Rust 30-Minute Interview Cheat Sheet\" OR file:\"67 - 100 HFT and Rust Interview Questions with Detailed Answers\"",
+      "color": {
+        "a": 1,
+        "rgb": 16733525
+      }
+    },
+    {
+      "query": "path:\"50 - Interview Prep\"",
+      "color": {
+        "a": 1,
+        "rgb": 16750848
+      }
+    },
+    {
+      "query": "tag:#hub",
+      "color": {
+        "a": 1,
+        "rgb": 4891903
+      }
+    },
+    {
+      "query": "path:\"projects/\"",
+      "color": {
+        "a": 1,
+        "rgb": 65433
+      }
+    }
+  ],
   "collapse-display": true,
   "showArrow": false,
   "textFadeMultiplier": 0,

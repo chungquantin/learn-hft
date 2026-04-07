@@ -11,14 +11,10 @@
             "id": "3c27dc5216f04251",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "14 - Low-Latency Systems Foundations.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "14 - Low-Latency Systems Foundations"
+              "title": "New tab"
             }
           }
         ]
@@ -183,33 +179,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "3c27dc5216f04251",
+  "active": "59d4bf300f97ad96",
   "lastOpenFiles": [
-    "skills-lock.json",
-    "92 - Developing High-Frequency Trading Systems (Full Research).md",
-    "05 - Exchange Architecture.md",
-    "11 - Seqlocks.md",
-    "21 - Rust for HFT Deep Dive.md",
-    "20 - Detailed Guides.md",
-    "00 - Roadmap.md",
-    "README.md",
-    "32 - Order Book Engine Deep Dive.md",
-    "33 - Execution Management Deep Dive.md",
-    "34 - Risk Engine Deep Dive.md",
-    "28 - Market Making Deep Dive.md",
-    "24 - Queues, Ring Buffers, and Backpressure.md",
-    "26 - Building a Low-Latency Trading Engine.md",
-    "30 - Backend Systems Hub.md",
-    "25 - Logging and Telemetry Deep Dive.md",
-    "02 - Rust for HFT.md",
-    "19 - Matching Engines, Queue Priority, and Order Amend Semantics.md",
-    "18 - Time and Timestamp Semantics.md",
-    "17 - Crypto Exchange Reality.md",
-    "16 - Language Roles in an HFT Stack.md",
-    "15 - Benchmarking and Tick-to-Trade Measurement.md",
-    "06 - Strategy Research.md",
-    "14 - Low-Latency Systems Foundations.md",
-    "91 - Developing High-Frequency Trading Systems (Book Notes).md",
-    "46 - Order Flow and Event-Driven Trading.md"
+    "50 - Interview Prep/67 - 100 HFT and Rust Interview Questions with Detailed Answers.md",
+    "50 - Interview Prep/66 - HFT Rust 30-Minute Interview Cheat Sheet.md",
+    "50 - Interview Prep/65 - HFT Rust System Design Master Note.md",
+    "50 - Interview Prep/64 - Matching Engine Benchmark and Profiling Plan.md",
+    "50 - Interview Prep/63 - Rust Matching Engine Implementation Blueprint.md",
+    "50 - Interview Prep/62 - Ultra-Low-Latency Matching Engine Design.md",
+    "50 - Interview Prep/61 - HFT Interview Drills and Portfolio Packaging.md",
+    "50 - Interview Prep/60 - TigerBeetle Integration Component Plan.md",
+    "50 - Interview Prep/59 - Distributed Topology and Reliability Component Plan.md",
+    "50 - Interview Prep/58 - Order Book and Market Data Component Plan.md",
+    "50 - Interview Prep/57 - Matching Engine Component Plan.md",
+    "50 - Interview Prep/56 - Rust HFT 16-Week Implementation Path.md",
+    "50 - Interview Prep/55 - Rust HFT Interview Implementation Plan.md",
+    "50 - Interview Prep/12 - Low-Latency Logging and Telemetry.md",
+    "50 - Interview Prep/11 - Seqlocks.md",
+    "50 - Interview Prep/10 - Ring Buffers in Rust.md",
+    "50 - Interview Prep/09 - Study Questions.md",
+    "40 - Ops and Frontend/54 - UX for Trading and Operations.md",
+    "40 - Ops and Frontend/52 - Monitoring, Alerting, and Incident Response.md",
+    "40 - Ops and Frontend/51 - Operator UI and Control Plane.md",
+    "40 - Ops and Frontend/50 - Frontend and Operator Systems Hub.md",
+    "30 - Data and Research/53 - Research Dashboards and Visualization.md",
+    "30 - Data and Research/46 - Order Flow and Event-Driven Trading.md",
+    "30 - Data and Research/45 - Analytics and Post-Trade Review.md",
+    "30 - Data and Research/44 - Data Quality and Lineage.md",
+    "30 - Data and Research/43 - Feature Engineering and Labeling.md",
+    "50 - Interview Prep",
+    "40 - Ops and Frontend",
+    "30 - Data and Research",
+    "20 - Deep Dives",
+    "10 - Foundations",
+    "00 - Start",
+    "projects/hft-matching-engine-rs/target/debug/incremental/hft_matching_engine_rs-0lcrh1hpg1y8a/s-hhcwdc99ra-04k565o-1qnrtq2ctit1fa536ujhc8zo6/work-products.bin",
+    "projects/hft-matching-engine-rs/target/debug/incremental/hft_matching_engine_rs-0lcrh1hpg1y8a/s-hhcwdc99ra-04k565o-1qnrtq2ctit1fa536ujhc8zo6/query-cache.bin",
+    "projects/hft-matching-engine-rs/target/debug/incremental/hft_matching_engine_rs-0lcrh1hpg1y8a/s-hhcwdc99ra-04k565o-1qnrtq2ctit1fa536ujhc8zo6/metadata.rmeta",
+    "projects/hft-matching-engine-rs/target/debug/incremental/hft_matching_engine_rs-0lcrh1hpg1y8a/s-hhcwdc99ra-04k565o-1qnrtq2ctit1fa536ujhc8zo6/dep-graph.bin"
   ]
 }

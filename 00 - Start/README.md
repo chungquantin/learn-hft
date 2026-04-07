@@ -45,6 +45,22 @@ Start here:
 - [[92 - Developing High-Frequency Trading Systems (Full Research)]]
 - [[99 - Glossary]]
 
+Implementation + interview branch:
+
+- [[55 - Rust HFT Interview Implementation Plan]]
+- [[56 - Rust HFT 16-Week Implementation Path]]
+- [[57 - Matching Engine Component Plan]]
+- [[58 - Order Book and Market Data Component Plan]]
+- [[59 - Distributed Topology and Reliability Component Plan]]
+- [[60 - TigerBeetle Integration Component Plan]]
+- [[61 - HFT Interview Drills and Portfolio Packaging]]
+- [[62 - Ultra-Low-Latency Matching Engine Design]]
+- [[63 - Rust Matching Engine Implementation Blueprint]]
+- [[64 - Matching Engine Benchmark and Profiling Plan]]
+- [[65 - HFT Rust System Design Master Note]]
+- [[66 - HFT Rust 30-Minute Interview Cheat Sheet]]
+- [[67 - 100 HFT and Rust Interview Questions with Detailed Answers]]
+
 Suggested learning path:
 
 1. Read [[00 - Roadmap]]
