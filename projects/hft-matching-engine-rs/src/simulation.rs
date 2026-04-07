@@ -22,12 +22,17 @@
 //! ```
 
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
 use std::time::Instant;
+use std::{sync::Once, thread::JoinHandle};
 
 use crate::command::{EngineCommand, IdempotencyKey, OrderCommand};
+use crate::event::ExecutionEventKind;
 use crate::partition::PartitionRuntime;
 use crate::types::{OrderId, OrderType, Side, TimeInForce};
+use tracing::{debug, info, info_span, trace, warn};
+use tracing_subscriber::EnvFilter;
 
 /// Tunables for synthetic engine simulation.
 #[derive(Clone, Debug)]
@@ -48,6 +53,12 @@ pub struct SimulationConfig {
     pub cancel_every: u64,
     /// Every Nth command attempts a replace (if local state has an order).
     pub replace_every: u64,
+    /// Whether simulation should initialize and emit tracing logs.
+    pub enable_tracing: bool,
+    /// Max per-producer commands to log at info level (rest go to trace/none).
+    pub trace_first_n_commands_per_producer: u64,
+    /// Max emitted events to log per partition consumer.
+    pub trace_first_n_events_per_partition: u64,
 }
 
 impl Default for SimulationConfig {
@@ -61,6 +72,9 @@ impl Default for SimulationConfig {
             price_band_ticks: 32,
             cancel_every: 17,
             replace_every: 29,
+            enable_tracing: true,
+            trace_first_n_commands_per_producer: 20,
+            trace_first_n_events_per_partition: 20,
         }
     }
 }
@@ -82,6 +96,16 @@ pub struct SimulationReport {
     pub commands_per_sec: f64,
     /// Approximate event throughput (`events_emitted / elapsed_sec`).
     pub events_per_sec: f64,
+    /// Number of `Accepted` events.
+    pub accepted_events: u64,
+    /// Number of `Trade` events.
+    pub trade_events: u64,
+    /// Number of `Rested` events.
+    pub rested_events: u64,
+    /// Number of `Canceled` events.
+    pub canceled_events: u64,
+    /// Number of `Rejected` events.
+    pub rejected_events: u64,
 }
 
 #[derive(Clone, Debug)]
@@ -89,6 +113,30 @@ struct ProducerStats {
     generated: u64,
     enqueued: u64,
     dropped: u64,
+}
+
+#[derive(Clone, Debug, Default)]
+struct ConsumerStats {
+    emitted: u64,
+    accepted: u64,
+    trades: u64,
+    rested: u64,
+    canceled: u64,
+    rejected: u64,
+}
+
+static TRACE_INIT: Once = Once::new();
+
+fn init_tracing_once() {
+    TRACE_INIT.call_once(|| {
+        // Use RUST_LOG if provided; otherwise default to info-level crate logs.
+        let env_filter = EnvFilter::try_from_default_env()
+            .unwrap_or_else(|_| EnvFilter::new("hft_matching_engine_rs=info"));
+        let _ = tracing_subscriber::fmt()
+            .with_env_filter(env_filter)
+            .with_target(false)
+            .try_init();
+    });
 }
 
 /// Small deterministic pseudo-random generator (LCG).
@@ -118,18 +166,44 @@ pub fn run_partitioned_simulation(cfg: SimulationConfig) -> SimulationReport {
     assert!(cfg.partitions > 0, "partitions must be > 0");
     assert!(cfg.price_band_ticks > 0, "price_band_ticks must be > 0");
 
+    if cfg.enable_tracing {
+        init_tracing_once();
+    }
+
+    info!(
+        partitions = cfg.partitions,
+        producers = cfg.producers,
+        commands_per_producer = cfg.commands_per_producer,
+        ingress_capacity_per_partition = cfg.ingress_capacity_per_partition,
+        "simulation start"
+    );
+
     let runtime = Arc::new(PartitionRuntime::new(
         cfg.partitions,
         cfg.ingress_capacity_per_partition,
     ));
+    let producers_done = Arc::new(AtomicBool::new(false));
 
     let started_at = Instant::now();
-    let mut handles = Vec::with_capacity(cfg.producers);
+    let mut handles: Vec<JoinHandle<ProducerStats>> = Vec::with_capacity(cfg.producers);
+    let mut consumer_handles: Vec<JoinHandle<ConsumerStats>> = Vec::with_capacity(cfg.partitions);
+
+    // Start one consumer loop per partition so matching runs concurrently with ingestion.
+    for partition_idx in 0..cfg.partitions {
+        let rt = Arc::clone(&runtime);
+        let done = Arc::clone(&producers_done);
+        let local_cfg = cfg.clone();
+        consumer_handles.push(thread::spawn(move || {
+            consume_partition_loop(partition_idx, &local_cfg, &rt, &done)
+        }));
+    }
 
     for producer_idx in 0..cfg.producers {
         let rt = Arc::clone(&runtime);
         let local_cfg = cfg.clone();
-        handles.push(thread::spawn(move || produce_commands(producer_idx as u64, &local_cfg, &rt)));
+        handles.push(thread::spawn(move || {
+            produce_commands(producer_idx as u64, &local_cfg, &rt)
+        }));
     }
 
     // Aggregate producer stats after all generators finish.
@@ -138,29 +212,131 @@ pub fn run_partitioned_simulation(cfg: SimulationConfig) -> SimulationReport {
     let mut dropped = 0_u64;
     for handle in handles {
         let stats = handle.join().expect("producer thread failed");
+        debug!(
+            generated = stats.generated,
+            enqueued = stats.enqueued,
+            dropped = stats.dropped,
+            "producer finished"
+        );
         generated = generated.wrapping_add(stats.generated);
         enqueued = enqueued.wrapping_add(stats.enqueued);
         dropped = dropped.wrapping_add(stats.dropped);
     }
+    producers_done.store(true, Ordering::Release);
 
-    // Drain all partition queues once producers are done.
-    let events = runtime.drain_all();
+    // Merge consumer-side event stats after they finish draining.
+    let mut consumer_total = ConsumerStats::default();
+    for handle in consumer_handles {
+        let stats = handle.join().expect("consumer thread failed");
+        consumer_total.emitted = consumer_total.emitted.wrapping_add(stats.emitted);
+        consumer_total.accepted = consumer_total.accepted.wrapping_add(stats.accepted);
+        consumer_total.trades = consumer_total.trades.wrapping_add(stats.trades);
+        consumer_total.rested = consumer_total.rested.wrapping_add(stats.rested);
+        consumer_total.canceled = consumer_total.canceled.wrapping_add(stats.canceled);
+        consumer_total.rejected = consumer_total.rejected.wrapping_add(stats.rejected);
+    }
+
+    // Safety net: one final drain in case any event was left in queue.
+    let final_drain_events = runtime.drain_all();
+    let final_drain_count = final_drain_events.len() as u64;
     let elapsed = started_at.elapsed();
     let elapsed_ms = elapsed.as_millis();
     let elapsed_sec = elapsed.as_secs_f64().max(1e-9);
+    let total_events = consumer_total.emitted.wrapping_add(final_drain_count);
 
-    SimulationReport {
+    let report = SimulationReport {
         commands_generated: generated,
         commands_enqueued: enqueued,
         commands_dropped: dropped,
-        events_emitted: events.len() as u64,
+        events_emitted: total_events,
         elapsed_ms,
         commands_per_sec: enqueued as f64 / elapsed_sec,
-        events_per_sec: events.len() as f64 / elapsed_sec,
+        events_per_sec: total_events as f64 / elapsed_sec,
+        accepted_events: consumer_total.accepted,
+        trade_events: consumer_total.trades,
+        rested_events: consumer_total.rested,
+        canceled_events: consumer_total.canceled,
+        rejected_events: consumer_total.rejected,
+    };
+
+    info!(
+        generated = report.commands_generated,
+        enqueued = report.commands_enqueued,
+        dropped = report.commands_dropped,
+        events = report.events_emitted,
+        accepted = report.accepted_events,
+        trades = report.trade_events,
+        rested = report.rested_events,
+        canceled = report.canceled_events,
+        rejected = report.rejected_events,
+        elapsed_ms = report.elapsed_ms,
+        commands_per_sec = report.commands_per_sec,
+        events_per_sec = report.events_per_sec,
+        "simulation end"
+    );
+    report
+}
+
+fn consume_partition_loop(
+    partition_idx: usize,
+    cfg: &SimulationConfig,
+    runtime: &PartitionRuntime,
+    producers_done: &AtomicBool,
+) -> ConsumerStats {
+    let _span = info_span!("consumer", partition = partition_idx).entered();
+    let mut stats = ConsumerStats::default();
+
+    loop {
+        let events = runtime.drain_partition(partition_idx);
+        if events.is_empty() {
+            // Exit condition: producers have finished and partition queue is currently empty.
+            if producers_done.load(Ordering::Acquire) {
+                break;
+            }
+            std::thread::yield_now();
+            continue;
+        }
+
+        for ev in events {
+            stats.emitted = stats.emitted.wrapping_add(1);
+            match ev.kind {
+                ExecutionEventKind::Accepted => stats.accepted = stats.accepted.wrapping_add(1),
+                ExecutionEventKind::Trade => stats.trades = stats.trades.wrapping_add(1),
+                ExecutionEventKind::Rested => stats.rested = stats.rested.wrapping_add(1),
+                ExecutionEventKind::Canceled => stats.canceled = stats.canceled.wrapping_add(1),
+                ExecutionEventKind::Rejected => stats.rejected = stats.rejected.wrapping_add(1),
+            }
+
+            if stats.emitted <= cfg.trace_first_n_events_per_partition {
+                info!(
+                    seq = ev.seq,
+                    order_id = ev.order_id.0,
+                    kind = ?ev.kind,
+                    price_ticks = ev.price_ticks,
+                    qty = ev.quantity,
+                    "consumer observed event"
+                );
+            } else {
+                trace!(kind = ?ev.kind, "consumer observed event (trace-only)");
+            }
+        }
     }
+
+    debug!(
+        partition = partition_idx,
+        emitted = stats.emitted,
+        accepted = stats.accepted,
+        trades = stats.trades,
+        rested = stats.rested,
+        canceled = stats.canceled,
+        rejected = stats.rejected,
+        "consumer finished"
+    );
+    stats
 }
 
 fn produce_commands(seed: u64, cfg: &SimulationConfig, runtime: &PartitionRuntime) -> ProducerStats {
+    let _span = info_span!("producer", producer_seed = seed).entered();
     let mut rng = Lcg::new(seed ^ 0x9E3779B97F4A7C15);
     // Local list of live-ish order ids used to generate cancel/replace pressure.
     let mut local_orders: Vec<OrderId> = Vec::with_capacity(2048);
@@ -195,11 +371,22 @@ fn produce_commands(seed: u64, cfg: &SimulationConfig, runtime: &PartitionRuntim
             EngineCommand::New(build_new_order_command(idem, order_id, &mut rng, cfg))
         };
 
+        if i < cfg.trace_first_n_commands_per_producer {
+            info!(index = i, ?cmd, "producer generated command");
+        } else {
+            trace!(index = i, "producer generated command (trace-only)");
+        }
+
         if runtime.enqueue(cmd).is_ok() {
             enqueued = enqueued.wrapping_add(1);
         } else {
             // Queue full is expected in stress runs. We count but continue.
             dropped = dropped.wrapping_add(1);
+            if dropped <= cfg.trace_first_n_commands_per_producer {
+                warn!(index = i, dropped, "enqueue failed: partition queue full");
+            } else {
+                trace!(index = i, dropped, "enqueue failed: partition queue full");
+            }
         }
     }
 
@@ -251,6 +438,9 @@ mod tests {
             price_band_ticks: 16,
             cancel_every: 11,
             replace_every: 19,
+            enable_tracing: false,
+            trace_first_n_commands_per_producer: 0,
+            trace_first_n_events_per_partition: 0,
         };
 
         let report = run_partitioned_simulation(cfg);
@@ -259,5 +449,6 @@ mod tests {
             report.commands_generated,
             report.commands_enqueued + report.commands_dropped
         );
+        assert!(report.events_emitted > 0);
     }
 }

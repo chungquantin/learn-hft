@@ -65,6 +65,21 @@ let report = run_partitioned_simulation(SimulationConfig::default());
 println!("{report:?}");
 ```
 
+### Run with tracing logs
+
+```bash
+cargo run --bin sim
+RUST_LOG=hft_matching_engine_rs=debug cargo run --bin sim
+RUST_LOG=hft_matching_engine_rs=trace cargo run --bin sim
+```
+
+Tracing shows:
+- producer command generation
+- partition enqueue/drain behavior
+- engine command processing and event counts
+- consumer-observed matching events (`Accepted/Trade/Rested/Canceled/Rejected`)
+- simulation start/end summary metrics
+
 ## Notes
 
 - The ring buffer is SPSC only; do not use multiple producers or multiple consumers on one queue.

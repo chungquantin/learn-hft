@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "50 - Interview Prep/56 - Rust HFT 16-Week Implementation Path.md",
+                "file": "50 - Interview Prep/57 - Matching Engine Component Plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "56 - Rust HFT 16-Week Implementation Path"
+              "title": "57 - Matching Engine Component Plan"
             }
           }
         ]
@@ -220,20 +220,21 @@
   },
   "active": "3c27dc5216f04251",
   "lastOpenFiles": [
-    "target/debug/incremental/matching_latency-0bye0p1rrbdth/s-hhdfdodw4y-1o5ecu8-dmczdbnwcfio6ooxyv4i71f1w/work-products.bin",
-    "target/debug/incremental/matching_latency-0bye0p1rrbdth/s-hhdfdodw4y-1o5ecu8-dmczdbnwcfio6ooxyv4i71f1w/query-cache.bin",
-    "target/debug/incremental/matching_latency-0bye0p1rrbdth/s-hhdfdodw4y-1o5ecu8-dmczdbnwcfio6ooxyv4i71f1w/dep-graph.bin",
-    "target/debug/incremental/matching_latency-0bye0p1rrbdth/s-hhdfdodw4y-1o5ecu8-dmczdbnwcfio6ooxyv4i71f1w",
-    "target/debug/incremental/matching_latency-0bye0p1rrbdth/s-hhdfdodw4y-1o5ecu8.lock",
-    "target/debug/incremental/hft_matching_engine_rs-164730x7q2wjw/s-hhdfdobo3c-0kqc5f9-07m8fwuld27vofktte3ruk1s3/work-products.bin",
-    "target/debug/incremental/hft_matching_engine_rs-164730x7q2wjw/s-hhdfdobo3c-0kqc5f9-07m8fwuld27vofktte3ruk1s3/query-cache.bin",
-    "target/debug/incremental/hft_matching_engine_rs-164730x7q2wjw/s-hhdfdobo3c-0kqc5f9-07m8fwuld27vofktte3ruk1s3/dep-graph.bin",
-    "target/debug/incremental/hft_matching_engine_rs-164730x7q2wjw/s-hhdfdobo3c-0kqc5f9-07m8fwuld27vofktte3ruk1s3",
-    "target/debug/incremental/hft_matching_engine_rs-2gm0y0np8mkj1/s-hhdfdobo3i-1q71etq-0p8td7hcym6hs26367xg0p8z3/work-products.bin",
-    "target/debug/incremental/hft_matching_engine_rs-2gm0y0np8mkj1/s-hhdfdobo3i-1q71etq-0p8td7hcym6hs26367xg0p8z3/query-cache.bin",
+    "target/debug/incremental/run_all-2ehobgs59bcj9/s-hhdqhxsull-0zxqjev-9u5c26b9lza5w6fegya62vbkw/work-products.bin",
+    "target/debug/incremental/run_all-2ehobgs59bcj9/s-hhdqhxsull-0zxqjev-9u5c26b9lza5w6fegya62vbkw/query-cache.bin",
+    "target/debug/incremental/run_all-2ehobgs59bcj9/s-hhdqhxsull-0zxqjev-9u5c26b9lza5w6fegya62vbkw/dep-graph.bin",
+    "target/debug/incremental/run_all-2ehobgs59bcj9/s-hhdqhxsull-0zxqjev-9u5c26b9lza5w6fegya62vbkw",
+    "target/debug/incremental/run_all-0svz0spg4mnsh/s-hhdqhxsula-11xf77h-1ysngdktl6rg31ndb0g3puytw/work-products.bin",
+    "target/debug/incremental/run_all-0svz0spg4mnsh/s-hhdqhxsula-11xf77h-1ysngdktl6rg31ndb0g3puytw/query-cache.bin",
+    "target/debug/incremental/run_all-0svz0spg4mnsh/s-hhdqhxsula-11xf77h-1ysngdktl6rg31ndb0g3puytw/dep-graph.bin",
+    "target/debug/incremental/run_all-0svz0spg4mnsh/s-hhdqhxsula-11xf77h-1ysngdktl6rg31ndb0g3puytw",
+    "target/debug/incremental/run_all-2ehobgs59bcj9/s-hhdqhxsull-0zxqjev.lock",
+    "target/debug/incremental/run_all-0svz0spg4mnsh/s-hhdqhxsula-11xf77h.lock",
+    "target/debug/incremental/concurrency_practices-3fxicw1qff2hg/s-hhdqhxorlx-16smwly-co0cwr5snltd9z93kdszwizro/work-products.bin",
+    "projects/concurrency-practices/README.md",
+    "50 - Interview Prep/56 - Rust HFT 16-Week Implementation Path.md",
     "projects/hft-matching-engine-rs/README.md",
     "50 - Interview Prep/57 - Matching Engine Component Plan.md",
-    "50 - Interview Prep/56 - Rust HFT 16-Week Implementation Path.md",
     "50 - Interview Prep/55 - Rust HFT Interview Implementation Plan.md",
     "50 - Interview Prep/12 - Low-Latency Logging and Telemetry.md",
     "50 - Interview Prep/11 - Seqlocks.md",
@@ -254,7 +255,6 @@
     "50 - Interview Prep/59 - Distributed Topology and Reliability Component Plan.md",
     "50 - Interview Prep/58 - Order Book and Market Data Component Plan.md",
     "40 - Ops and Frontend/54 - UX for Trading and Operations.md",
-    "40 - Ops and Frontend/52 - Monitoring, Alerting, and Incident Response.md",
-    "40 - Ops and Frontend/51 - Operator UI and Control Plane.md"
+    "40 - Ops and Frontend/52 - Monitoring, Alerting, and Incident Response.md"
   ]
 }

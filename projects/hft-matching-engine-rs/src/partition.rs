@@ -26,6 +26,7 @@ use crate::command::EngineCommand;
 use crate::engine::ConcurrentMatchingEngine;
 use crate::event::ExecutionEvent;
 use crate::ring_buffer::SpscRingBuffer;
+use tracing::{debug, trace};
 
 /// One partition shard: ingress queue + engine.
 #[derive(Clone)]
@@ -78,14 +79,21 @@ impl PartitionRuntime {
     /// Returns the original command if queue is full.
     pub fn enqueue(&self, cmd: EngineCommand) -> Result<(), EngineCommand> {
         let idx = self.route_partition(&cmd);
+        trace!(partition = idx, ?cmd, "enqueue command to partition ingress");
         self.shards[idx].ingress.push(cmd)
     }
 
     /// Drains one partition and returns produced events.
     pub fn drain_partition(&self, idx: usize) -> Vec<ExecutionEvent> {
-        self.shards[idx]
+        let events = self.shards[idx]
             .engine
-            .drain_command_ingress(&self.shards[idx].ingress)
+            .drain_command_ingress(&self.shards[idx].ingress);
+        debug!(
+            partition = idx,
+            emitted_events = events.len(),
+            "drained partition ingress"
+        );
+        events
     }
 
     /// Drains all partitions and returns combined event stream.

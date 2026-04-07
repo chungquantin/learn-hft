@@ -25,6 +25,7 @@ use crate::event::{ExecutionEvent, ExecutionEventKind};
 use crate::matcher::match_command;
 use crate::orderbook::OrderBook;
 use crate::ring_buffer::SpscRingBuffer;
+use tracing::{debug, trace};
 
 /// Single-partition matching engine.
 ///
@@ -90,13 +91,15 @@ impl MatchingEngine {
 
     /// Processes any engine command type (`New`, `Cancel`, `Replace`).
     pub fn process(&mut self, cmd: EngineCommand) -> Vec<ExecutionEvent> {
+        trace!(?cmd, "engine process begin");
         // Global dedupe: same idempotency key always maps to same side effect (no-op).
         if self.seen.contains(&cmd.idempotency_key()) {
+            debug!(idempotency_key = ?cmd.idempotency_key(), "duplicate command ignored");
             return Vec::new();
         }
         self.seen.insert(cmd.idempotency_key());
 
-        match cmd {
+        let events = match cmd {
             EngineCommand::New(order_cmd) => self.process_new_without_dedupe(order_cmd),
             EngineCommand::Cancel { order_id, .. } => {
                 // Cancel only succeeds for resting orders currently present in book index.
@@ -110,6 +113,7 @@ impl MatchingEngine {
                 } else {
                     // Emit reject-like signal for observability when cancel target is absent.
                     // We use quantity/price as zero placeholders for non-fill rejection.
+                    debug!(?order_id, "cancel target not found; emitting rejected event");
                     vec![self.emit_event(order_id, ExecutionEventKind::Rejected, 0, 0)]
                 }
             }
@@ -130,6 +134,10 @@ impl MatchingEngine {
                         removed.quantity,
                     ));
                 } else {
+                    debug!(
+                        ?cancel_order_id,
+                        "replace cancel target not found; emitting rejected event"
+                    );
                     events.push(self.emit_event(
                         cancel_order_id,
                         ExecutionEventKind::Rejected,
@@ -141,7 +149,9 @@ impl MatchingEngine {
                 events.extend(self.process_new_without_dedupe(new_order));
                 events
             }
-        }
+        };
+        debug!(emitted_events = events.len(), next_seq = self.next_seq, "engine process end");
+        events
     }
 
     /// Processes one order command and returns emitted execution events.
