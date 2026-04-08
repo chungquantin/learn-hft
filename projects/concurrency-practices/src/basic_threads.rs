@@ -9,8 +9,7 @@
 //! - OS threads are preemptively scheduled and expensive compared to async tasks.
 //! - They are still the right tool for CPU-parallel work.
 
-use std::thread;
-use std::time::Duration;
+use std::{sync::Mutex, thread, time::Duration};
 
 /// Spawns `n` worker threads, each returning a simple computed value.
 ///
@@ -18,20 +17,21 @@ use std::time::Duration;
 /// - returning values through `join` is the simplest way to gather results
 /// - avoids shared mutable state in your first thread examples
 pub fn spawn_and_join_workers(n: usize) -> Vec<usize> {
-    let mut handles = Vec::with_capacity(n);
-    for i in 0..n {
-        handles.push(thread::spawn(move || {
-            // Simulate tiny work so scheduling is visible in logs/demos.
-            thread::sleep(Duration::from_millis(2));
-            i * i
-        }));
-    }
+    let out = Mutex::new(Vec::with_capacity(n));
 
-    let mut out = Vec::with_capacity(n);
-    for handle in handles {
-        out.push(handle.join().expect("worker panicked"));
-    }
-    out
+    thread::scope(|s| {
+        for i in 0..n {
+            let out_ref = &out; // Create a reference to the Mutex
+            s.spawn(move || {
+                thread::sleep(Duration::from_millis(2));
+                // Move the REFERENCE and 'i' into the thread
+                out_ref.lock().unwrap().push(i * i);
+            });
+        }
+    });
+
+    // Since the threads are gone, we can safely take the Vec out of the Mutex.
+    out.into_inner().expect("Mutex was poisoned")
 }
 
 #[cfg(test)]

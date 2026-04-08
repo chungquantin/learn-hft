@@ -15,15 +15,42 @@
 //!
 //! A runnable aggregator is available at:
 //! - `cargo run -p concurrency-practices --bin run_all`
+//!
+//! Exercise-to-solution mapping:
+//! - `*_exercise` modules are instruction-only stubs for you to implement.
+//! - `*_solution` aliases below point to the completed reference implementations.
 
 pub mod atomics;
 pub mod atomics_deep_dive;
+pub mod atomics_deep_dive_exercise;
+pub mod atomics_exercise;
 pub mod basic_threads;
+pub mod basic_threads_exercise;
 pub mod channels_patterns;
+pub mod channels_patterns_exercise;
 pub mod concurrent_dll;
+pub mod concurrent_dll_exercise;
 pub mod deadlock_patterns;
+pub mod deadlock_patterns_exercise;
 pub mod green_threads_async;
+pub mod green_threads_async_exercise;
 pub mod send_sync;
+pub mod send_sync_exercise;
 pub mod shared_state;
+pub mod shared_state_exercise;
 pub mod thread_lifecycle;
+pub mod thread_lifecycle_exercise;
 pub mod thread_pool;
+pub mod thread_pool_exercise;
+
+pub use atomics as atomics_solution;
+pub use atomics_deep_dive as atomics_deep_dive_solution;
+pub use basic_threads as basic_threads_solution;
+pub use channels_patterns as channels_patterns_solution;
+pub use concurrent_dll as concurrent_dll_solution;
+pub use deadlock_patterns as deadlock_patterns_solution;
+pub use green_threads_async as green_threads_async_solution;
+pub use send_sync as send_sync_solution;
+pub use shared_state as shared_state_solution;
+pub use thread_lifecycle as thread_lifecycle_solution;
+pub use thread_pool as thread_pool_solution;
