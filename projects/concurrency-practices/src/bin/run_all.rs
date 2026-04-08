@@ -1,6 +1,9 @@
 //! Runs all concurrency practice demos from basic to advanced.
 
 use concurrency_practices::atomics::{atomic_counter, claim_once};
+use concurrency_practices::atomics_deep_dive::{
+    OnceValue, cas_increment, relaxed_counter, release_acquire_publication,
+};
 use concurrency_practices::basic_threads::spawn_and_join_workers;
 use concurrency_practices::channels_patterns::{
     bounded_backpressure_demo, fan_in_sum, mpmc_worker_pool_demo,
@@ -33,6 +36,24 @@ async fn main() {
     let once_flag = AtomicUsize::new(0);
     println!("claim_once #1: {}", claim_once(&once_flag));
     println!("claim_once #2: {}", claim_once(&once_flag));
+
+    println!("\n== atomics_deep_dive ==");
+    println!("relaxed_counter: {}", relaxed_counter(4, 1_000));
+    println!(
+        "release_acquire_publication(123): {}",
+        release_acquire_publication(123)
+    );
+    let cas_counter = AtomicUsize::new(0);
+    for _ in 0..10 {
+        cas_increment(&cas_counter);
+    }
+    println!(
+        "cas_increment after 10 calls: {}",
+        cas_counter.load(std::sync::atomic::Ordering::Relaxed)
+    );
+    let once = OnceValue::new();
+    println!("once get_or_init first: {}", once.get_or_init(|| 555));
+    println!("once get_or_init second: {}", once.get_or_init(|| 999));
 
     println!("\n== thread_lifecycle ==");
     println!("clean join result: {}", clean_join_example());

@@ -8,17 +8,24 @@ Progressive Rust concurrency practice project from basic to advanced.
 2. Shared state (`Arc`, `Mutex`, `RwLock`)
 3. `Send` / `Sync` fundamentals
 4. Atomics (`AtomicUsize`, `compare_exchange`)
-5. Thread lifecycle pitfalls (join discipline, zombie-like leaks)
-6. Async task scheduling (green-thread style with Tokio)
-7. Channel patterns (`mpsc`, `sync_channel`, `crossbeam-channel`)
-8. Deadlock-safe lock ordering patterns
-9. Fixed-size thread pool implementation
+5. Atomics deep dive (memory ordering, spin lock, once init)
+6. Thread lifecycle pitfalls (join discipline, zombie-like leaks)
+7. Async task scheduling (green-thread style with Tokio)
+8. Channel patterns (`mpsc`, `sync_channel`, `crossbeam-channel`)
+9. Deadlock-safe lock ordering patterns
+10. Fixed-size thread pool implementation
 
 ## Run all demos
 
 ```bash
 cargo run -p concurrency-practices --bin run_all
+cargo run -p concurrency-practices --bin atomics_lab
 ```
+
+## Beginner-friendly atomics guide
+
+- Read first: [docs/atomics_beginner_guide.md](docs/atomics_beginner_guide.md)
+- Then run: `cargo run -p concurrency-practices --bin atomics_lab`
 
 ## Run tests
 
@@ -41,3 +48,16 @@ cargo test -p concurrency-practices
 5. Study `deadlock_patterns.rs` and enforce lock-order rules in your own code
 6. Read `thread_pool.rs` end-to-end and modify it (timeouts, queue bounds, cancellation)
 7. Finish with `green_threads_async.rs` and compare async tasks vs OS threads
+
+## Atomics-focused study plan
+
+1. Read `src/atomics.rs` first (simple `Relaxed` + basic CAS)
+2. Then read `src/atomics_deep_dive.rs` in order:
+   - `relaxed_counter`
+   - `release_acquire_publication`
+   - `cas_increment`
+   - `SpinLock`
+   - `OnceValue`
+3. Run:
+   - `cargo run -p concurrency-practices --bin atomics_lab`
+4. Modify ordering choices and re-run tests to see what breaks.
