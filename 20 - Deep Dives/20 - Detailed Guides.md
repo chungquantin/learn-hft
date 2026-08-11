@@ -9,18 +9,30 @@ This section is meant to be read more like a sequence of short chapters than a c
 
 The purpose of this layer is not only to tell you what concepts exist. It is to explain why they matter, where they break, and how they connect to system design. If the map pages give you navigation, these guides should give you mental models.
 
-The core guides are:
+The core guides are grouped by purpose.
+
+Systems and Rust:
 
 - [[21 - Rust for HFT Deep Dive]]
-- [[22 - Perpetuals Deep Dive]]
 - [[23 - Seqlocks Deep Dive]]
 - [[24 - Queues, Ring Buffers, and Backpressure]]
 - [[25 - Logging and Telemetry Deep Dive]]
 - [[26 - Building a Low-Latency Trading Engine]]
 - [[27 - Exchange Protocols and Connectivity]]
+- [[37 - Kernel Bypass Technologies Deep Dive]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]
+
+Market structure and strategy:
+
+- [[22 - Perpetuals Deep Dive]]
 - [[28 - Market Making Deep Dive]]
 - [[29 - Arbitrage and Lead-Lag Deep Dive]]
+- [[38 - Liquidity Programs and CLMM Incentives]]
 - [[46 - Order Flow and Event-Driven Trading]]
+
+Quant and research:
+
+- [[47 - Quant Topics for HFT Research]]
 
 One good way to use this section is to read a guide, then immediately turn part of it into something concrete. That might be a benchmark, a small Rust experiment, a data collector, a replay tool, or simply a written attempt to explain the idea in your own words. The point is to make the concept resist passive agreement. If an idea matters for HFT, it should eventually survive contact with code, data, or system behavior.
 

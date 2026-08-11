@@ -20,6 +20,7 @@ projects/hft-matching-engine-rs/
     orderbook.rs
     matcher.rs
     engine.rs
+    gateway.rs
   benches/
     matching_latency.rs
 ```
@@ -32,6 +33,9 @@ projects/hft-matching-engine-rs/
 - `orderbook.rs`: price levels, resting order queues, mutation primitives
 - `matcher.rs`: matching loop logic and invariants
 - `engine.rs`: single-writer orchestration, command dispatch, event emission
+- `gateway.rs`: optional transport boundary for kernel sockets, DPDK, or socket acceleration
+
+Keep `gateway.rs` outside `matcher.rs`. Transport choices should change packet handling, session behavior, and ingress normalization; they should not change matching semantics.
 
 ## Core Traits
 
@@ -90,8 +94,10 @@ on_command(cmd):
 - why single-writer partitioning beats shared-lock models for p99 latency
 - how idempotency avoids duplicate side effects during retries/replay
 - how event sequence IDs support replay and reconciliation
+- why DPDK and FPGA belong at gateway/offload boundaries before they belong in the matching core
 
 Related:
 
-- [[62 - Ultra-Low-Latency Matching Engine Design]]
+- [[65 - HFT Rust System Design Master Note]]
 - [[57 - Matching Engine Component Plan]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]

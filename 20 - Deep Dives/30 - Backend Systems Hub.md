@@ -26,6 +26,7 @@ That is what the rest of this branch explores:
 - [[34 - Risk Engine Deep Dive]]
 - [[35 - Service Boundaries and Process Topology]]
 - [[36 - Reliability, Failure Modes, and Recovery]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]
 
 These topics connect directly to the more general architecture and Rust notes:
 
@@ -34,6 +35,7 @@ These topics connect directly to the more general architecture and Rust notes:
 - [[21 - Rust for HFT Deep Dive]]
 - [[26 - Building a Low-Latency Trading Engine]]
 - [[27 - Exchange Protocols and Connectivity]]
+- [[37 - Kernel Bypass Technologies Deep Dive]]
 
 One good way to read this branch is to follow the lifecycle of a single market event. A message arrives from the exchange. The ingestion layer must decide whether it is valid. The order-book engine must decide whether it changes trusted state. The strategy must decide whether that change matters. The risk engine must decide whether any resulting action is allowed. The execution layer must decide how to express intent to the venue and how to reconcile the response. Reliability logic must decide what to do if any step becomes ambiguous. Seen this way, backend design is not a pile of services. It is a chain of decisions about trust.
 

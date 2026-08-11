@@ -18,6 +18,7 @@ Those questions are explored through:
 - [[43 - Feature Engineering and Labeling]]
 - [[44 - Data Quality and Lineage]]
 - [[45 - Analytics and Post-Trade Review]]
+- [[47 - Quant Topics for HFT Research]]
 - [[29 - Arbitrage and Lead-Lag Deep Dive]]
 - [[46 - Order Flow and Event-Driven Trading]]
 

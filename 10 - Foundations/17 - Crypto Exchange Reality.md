@@ -74,5 +74,6 @@ Related:
 - [[03 - Perpetuals Trading]]
 - [[22 - Perpetuals Deep Dive]]
 - [[27 - Exchange Protocols and Connectivity]]
+- [[38 - Liquidity Programs and CLMM Incentives]]
 - [[41 - Data Collection and Storage]]
 - [[92 - Developing High-Frequency Trading Systems (Full Research)]]

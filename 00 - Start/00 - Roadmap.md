@@ -49,10 +49,25 @@ The project sequence is intentionally conservative: replay first, then collectio
 
 The final stage is not a separate destination so much as a continuing habit. Once the basic graph is in place, the work becomes one of deepening. That means adding formulas, exchange-specific notes, code experiments, benchmarks, postmortems, and design revisions. The vault should gradually stop being only a learning resource and start becoming your research memory.
 
+## Traversal by branch
+
+Use [[02 - Knowledge Tree]] when you want a directed path through the notes.
+
+The major branches are:
+
+- market intuition: [[01 - HFT Map]], [[03 - Perpetuals Trading]], [[04 - Market Microstructure]], [[17 - Crypto Exchange Reality]]
+- quant research: [[47 - Quant Topics for HFT Research]], [[42 - Research and Backtesting Systems]], [[43 - Feature Engineering and Labeling]], [[46 - Order Flow and Event-Driven Trading]]
+- engine design: [[19 - Matching Engines, Queue Priority, and Order Amend Semantics]], [[57 - Matching Engine Component Plan]], [[65 - HFT Rust System Design Master Note]], [[63 - Rust Matching Engine Implementation Blueprint]]
+- latency infrastructure: [[14 - Low-Latency Systems Foundations]], [[15 - Benchmarking and Tick-to-Trade Measurement]], [[37 - Kernel Bypass Technologies Deep Dive]], [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]
+- operations and safety: [[07 - Risk Management]], [[36 - Reliability, Failure Modes, and Recovery]], [[52 - Monitoring, Alerting, and Incident Response]]
+
+For the matching-engine build path, keep the order explicit: first matching semantics, then Rust implementation, then benchmark evidence, then DPDK or socket acceleration at the gateway, then FPGA only for narrow proven functions, then cloud or physical colocation topology.
+
 If you use the roadmap well, it does one thing above all: it helps you ask the right next question rather than merely absorbing more disconnected material.
 
 Related:
 
 - [[01 - HFT Map]]
+- [[02 - Knowledge Tree]]
 - [[20 - Detailed Guides]]
 - [[08 - Build Projects]]

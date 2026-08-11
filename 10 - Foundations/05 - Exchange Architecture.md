@@ -2,7 +2,7 @@
 title: Exchange Architecture
 tags: [exchange, systems, connectivity]
 ---
-
+;''
 # Exchange Architecture
 
 A trading system usually splits into market data ingestion, state management, decision logic, execution, and supervision.
@@ -130,6 +130,6 @@ Related:
 - [[03 - Perpetuals Trading]]
 - [[08 - Build Projects]]
 - [[19 - Matching Engines, Queue Priority, and Order Amend Semantics]]
-- [[10 - Ring Buffers in Rust]]
-- [[11 - Seqlocks]]
-- [[12 - Low-Latency Logging and Telemetry]]
+- [[24 - Queues, Ring Buffers, and Backpressure]]
+- [[23 - Seqlocks Deep Dive]]
+- [[25 - Logging and Telemetry Deep Dive]]

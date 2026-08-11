@@ -25,6 +25,6 @@ The real lesson is that seqlocks are specialized and powerful precisely because 
 
 Related:
 
-- [[11 - Seqlocks]]
+- [[23 - Seqlocks Deep Dive]]
 - [[24 - Queues, Ring Buffers, and Backpressure]]
 - [[26 - Building a Low-Latency Trading Engine]]

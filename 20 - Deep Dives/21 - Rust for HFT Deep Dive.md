@@ -48,6 +48,6 @@ If there is one deeper lesson to internalize, it is this: Rust matters in HFT no
 Related:
 
 - [[02 - Rust for HFT]]
-- [[11 - Seqlocks]]
+- [[23 - Seqlocks Deep Dive]]
 - [[24 - Queues, Ring Buffers, and Backpressure]]
 - [[26 - Building a Low-Latency Trading Engine]]

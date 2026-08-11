@@ -109,4 +109,4 @@ Mitigations:
 Related:
 
 - [[65 - HFT Rust System Design Master Note]]
-- [[62 - Ultra-Low-Latency Matching Engine Design]]
+- [[65 - HFT Rust System Design Master Note]]

@@ -73,6 +73,8 @@ Optimization checklist:
 - avoid string handling in hot path
 - batch outbound event publication where safe
 - pin matching thread core and isolate noisy neighbors
+- keep DPDK, socket acceleration, and FPGA offload outside the deterministic matching semantics
+- measure cloud or colocation topology separately from in-process matching latency
 
 ## Testing Plan
 
@@ -113,3 +115,4 @@ Related:
 - [[19 - Matching Engines, Queue Priority, and Order Amend Semantics]]
 - [[32 - Order Book Engine Deep Dive]]
 - [[33 - Execution Management Deep Dive]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]

@@ -386,6 +386,6 @@ Highlight:
 - [[56 - Rust HFT 16-Week Implementation Path]]
 - [[57 - Matching Engine Component Plan]]
 - [[60 - TigerBeetle Integration Component Plan]]
-- [[62 - Ultra-Low-Latency Matching Engine Design]]
+- [[65 - HFT Rust System Design Master Note]]
 - [[63 - Rust Matching Engine Implementation Blueprint]]
 - [[64 - Matching Engine Benchmark and Profiling Plan]]

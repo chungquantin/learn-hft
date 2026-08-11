@@ -21,7 +21,7 @@ The strongest practical principle here is simple: monitoring should not only tel
 
 Related:
 
-- [[12 - Low-Latency Logging and Telemetry]]
+- [[25 - Logging and Telemetry Deep Dive]]
 - [[18 - Time and Timestamp Semantics]]
 - [[36 - Reliability, Failure Modes, and Recovery]]
 - [[51 - Operator UI and Control Plane]]

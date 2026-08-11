@@ -27,7 +27,7 @@ The best practical summary is that good observability in HFT is not about adding
 
 Related:
 
-- [[12 - Low-Latency Logging and Telemetry]]
+- [[25 - Logging and Telemetry Deep Dive]]
 - [[18 - Time and Timestamp Semantics]]
 - [[24 - Queues, Ring Buffers, and Backpressure]]
 - [[26 - Building a Low-Latency Trading Engine]]

@@ -31,4 +31,5 @@ Related:
 - [[06 - Strategy Research]]
 - [[19 - Matching Engines, Queue Priority, and Order Amend Semantics]]
 - [[33 - Execution Management Deep Dive]]
+- [[38 - Liquidity Programs and CLMM Incentives]]
 - [[45 - Analytics and Post-Trade Review]]

@@ -264,4 +264,3 @@ Related:
 - [[27 - Exchange Protocols and Connectivity]]
 - [[42 - Research and Backtesting Systems]]
 - [[90 - Source Notes]]
-- [[91 - Developing High-Frequency Trading Systems (Book Notes)]]

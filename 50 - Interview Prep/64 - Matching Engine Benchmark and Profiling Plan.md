@@ -15,6 +15,7 @@ Measure:
 - commands/sec throughput
 - queue depth under burst
 - reject/defer rate under overload
+- topology latency from client to gateway, gateway to sequencer, and sequencer to matching partition
 
 Track separately by command type:
 
@@ -30,6 +31,8 @@ Track separately by command type:
 3. Deep crossing sweep
 4. Post-only reject heavy flow
 5. Replay determinism validation
+6. Gateway-to-matcher handoff with DPDK or socket-accelerated ingress
+7. Same-host, same-AZ, shared placement group, peering, PrivateLink, and public path comparisons where applicable
 
 ## Harness Rules
 
@@ -71,5 +74,6 @@ Emphasize:
 Related:
 
 - [[15 - Benchmarking and Tick-to-Trade Measurement]]
-- [[62 - Ultra-Low-Latency Matching Engine Design]]
+- [[65 - HFT Rust System Design Master Note]]
 - [[63 - Rust Matching Engine Implementation Blueprint]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]

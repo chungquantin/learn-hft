@@ -23,8 +23,18 @@ These branches are not isolated silos. They are connected by cross-cutting conce
 
 - [[05 - Exchange Architecture]]
 - [[07 - Risk Management]]
-- [[12 - Low-Latency Logging and Telemetry]]
+- [[25 - Logging and Telemetry Deep Dive]]
 - [[26 - Building a Low-Latency Trading Engine]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]
+
+There is also a fourth branch that deserves explicit attention: the latency infrastructure branch. This is where software design meets placement, NIC behavior, kernel bypass, FPGA offload, and cloud-native colocation. It should be read after the ownership model is clear, because infrastructure choices only become meaningful when you know which path is actually latency-sensitive.
+
+Key infrastructure notes:
+
+- [[14 - Low-Latency Systems Foundations]]
+- [[15 - Benchmarking and Tick-to-Trade Measurement]]
+- [[37 - Kernel Bypass Technologies Deep Dive]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]
 
 The backend branch teaches how the live engine maintains trustworthy state and acts safely under latency pressure. The data branch teaches how the system remembers, explains, and improves itself. The frontend and operator branch teaches how humans stay in control of a machine that can fail faster than they can think.
 
@@ -35,4 +45,5 @@ If you keep those three questions in mind, the whole graph becomes easier to nav
 Related:
 
 - [[00 - Roadmap]]
+- [[02 - Knowledge Tree]]
 - [[20 - Detailed Guides]]

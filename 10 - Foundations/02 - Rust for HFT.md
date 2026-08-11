@@ -139,8 +139,8 @@ Also avoid:
 Related:
 
 - [[05 - Exchange Architecture]]
-- [[10 - Ring Buffers in Rust]]
-- [[11 - Seqlocks]]
-- [[12 - Low-Latency Logging and Telemetry]]
+- [[24 - Queues, Ring Buffers, and Backpressure]]
+- [[23 - Seqlocks Deep Dive]]
+- [[25 - Logging and Telemetry Deep Dive]]
 - [[08 - Build Projects]]
 - [[90 - Source Notes]]
