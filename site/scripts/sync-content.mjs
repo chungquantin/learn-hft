@@ -61,6 +61,7 @@ for (const folder of vaultFolders) {
   copySelectedFiles(path.join(vaultDir, folder), path.join(contentDir, folder))
 }
 
+copySelectedFiles(path.join(vaultDir, "CHANGELOG.md"), path.join(contentDir, "CHANGELOG.md"))
 copySelectedFiles(path.join(vaultDir, "projects"), path.join(contentDir, "projects"))
 
 writeFileSync(
