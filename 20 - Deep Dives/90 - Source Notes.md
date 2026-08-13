@@ -255,9 +255,15 @@ Notes captured:
 - VHDPlus provides an integrated FPGA development ecosystem with boards, extensions, and an IDE built around a simplified VHDL superset language.
 - Development boards include the Core MAX10 (entry-level, internal ADC, large RAM, flash, onboard USB programmer, Arduino-compatible processor), MAX1000 (most affordable option), CYC1000 (25,000 logic elements, external SDRAM, flash, accelerometer), and CYC5000.
 - Extensions use the CRUVI connector standard: Camera (CSI/HDMI for object detection), Motor (robotics/encoder), Audio (codec for signal processing), WiFi (ESP-01 for IoT), Level Shifter (5V compatibility), and Shield MAX10 (power supply, additional CRUVI connectors).
-- The VHDPlus IDE is a cross-platform development environment that includes a simulator, package manager, and support for NIOS II soft processor creation.
-- VHDPlus language is a superset of VHDL with simplified syntax, making it accessible for beginners while retaining full VHDL compatibility.
+- The VHDPlus IDE (Windows, Linux; macOS limited — Quartus unsupported on Apple) integrates code editing, graphical pin assignment, GHDL-based simulation with waveform viewing, a package manager, and one-click download to FPGA via USB programmer. Uses Quartus Prime Lite (version 18.1) as backend compiler.
+- VHDPlus language is a superset of VHDL with simplified syntax: `Main{}` for top-level I/O, `Process{}` for clocked logic, `Thread{}` for multi-cycle sequences (with `Step{}`, `Wait{}`, `While{}`). Signals assigned with `<=` (update next cycle); variables with `:=` (update instantly). Transpiles to standard VHDL; any VHDL code can be mixed in.
 - The ecosystem targets Intel/Altera MAX10 and Cyclone families, which are low-cost entry points for FPGA prototyping and learning.
+- Core MAX10 board (10M08SAU169C8G): 8,000 LEs, 378 Kb RAM, 2 PLLs (>300 MHz), 24× 18×18 multipliers, 12-bit ADC (1 Msps, 8 channels), 64 Mb SDRAM, 64 Mb flash. CRUVI HS connector for camera/display extensions. 3.3V I/O (level shifter needed for 5V).
+- CYC1000 board (10CL025YU256C8G): 25,000 LEs, 594 Kb RAM, 4 PLLs, 66× 18×18 multipliers, 64 Mb SDRAM, 16 Mb flash. SRAM-based (must reload on power-up, unlike flash-based MAX10).
+- Shield MAX10 provides power backbone: dual DC/DC converters (8.5–28V→5V at 5A, 5V→3.3V at 2A), supports 3 CRUVI + 6 Pmod extensions simultaneously. Separated 3.3V rail prevents motor current spikes from affecting FPGA.
+- Motor extension: 2× DRV8871DDAR drivers (6.5–45V, 3A per channel), encoder input, PWM speed control via FPGA output pins.
+- Audio extension: MAX9867 codec, 48 kHz sample rate, 18-bit resolution, stereo ADC+DAC, headset jack.
+- Camera extension: CSI connector (Raspberry Pi Camera compatible) + HDMI output, differential pairs via CRUVI HS. Libraries are work-in-progress.
 
 Related:
 
