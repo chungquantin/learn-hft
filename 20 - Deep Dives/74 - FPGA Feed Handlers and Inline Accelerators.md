@@ -120,12 +120,78 @@ Version and deploy together:
 
 An FPGA release without its matching host and configuration is not a complete release.
 
+## FPGA architecture fundamentals
+
+An FPGA is a semiconductor device built around a matrix of configurable logic blocks (CLBs) connected by user-programmable interconnects. CLBs are the fundamental logic module; other modules include I/O blocks, DSP blocks, and embedded memory (BRAM/URAM). The logic blocks can implement both combinational and sequential logic functions through programmable lookup tables (LUTs), flip-flops, and carry chains.
+
+### FPGA types
+
+- **SRAM-based**: configuration stored in volatile SRAM cells. Must reload bitstream on every power-up. Standard for development and most production accelerator cards (Alveo, SmartNICs). Allows unlimited reprogramming.
+- **Flash-based**: configuration stored in non-volatile flash. Retains configuration across power cycles. Relevant for instant-on embedded or always-on deployments where boot time matters.
+- **Anti-fuse**: one-time programmable. Cannot be reconfigured. Used in defense, aerospace, and high-reliability applications where immutability and radiation hardness are requirements.
+
+### Key FPGA vendors and families
+
+| Vendor | Families | Notes |
+|--------|----------|-------|
+| AMD/Xilinx | Artix-7, Kintex, Virtex, Versal, Alveo | Alveo cards dominate HFT acceleration |
+| Intel/Altera | MAX10, Cyclone, Arria, Stratix, Agilex | Stratix/Agilex for high-end, MAX10/Cyclone for learning |
+| Lattice | iCE40, ECP5, Nexus | Low-power, smaller designs |
+| Microchip | PolarFire, SmartFusion | Flash-based, lower power |
+| Others | QuickLogic, Renesas, Flex Logix, GOWIN, Efinix | Niche or emerging players |
+
+The FPGA market is expected to exceed $20B by 2030. For HFT, AMD/Xilinx Alveo and Intel Stratix/Agilex are the primary production platforms. Entry-level boards (MAX1000 at ~$30, CYC1000 at ~$30) are useful for learning FPGA fundamentals before committing to production hardware.
+
+### HDL and development languages
+
+FPGAs are programmed using hardware description languages:
+
+- **VHDL**: verbose, strongly typed, dominant in European and defense contexts. Design at behavioral or structural level.
+- **Verilog/SystemVerilog**: C-like syntax, dominant in US and ASIC-adjacent work. SystemVerilog adds verification constructs.
+- **VHDPlus**: simplified VHDL superset with IDE, simulator, and package manager. Useful for rapid prototyping. Transpiles to standard VHDL.
+- **HLS (C/C++)**: Vivado HLS or Vitis compiles C/C++ to RTL. Faster iteration but less cycle-level control than hand-written RTL.
+- **Python**: Amaranth (formerly nMigen), MyHDL, or PYNQ for high-level synthesis and SoC interaction. Research and prototyping tool, not production RTL.
+
+### FPGA development workflow
+
+```text
+1. Describe function in HDL (VHDL, Verilog, or HLS)
+2. Simulate and verify against reference model
+3. Synthesize: HDL -> netlist -> place-and-route -> timing closure
+4. Generate bitstream
+5. Load bitstream onto FPGA
+6. Test in hardware (hardware-in-the-loop)
+7. Shadow beside CPU path before production trust
+```
+
+Timing closure is a critical gate: a design that simulates correctly may fail synthesis if logic paths exceed the clock period. Small changes can cause timing regressions, requiring re-placement or pipeline restructuring.
+
+### Soft processors
+
+Intel FPGAs support NIOS II, a soft processor instantiated in FPGA fabric. AMD/Xilinx offers MicroBlaze. These enable hybrid designs: hard real-time pipeline logic in RTL alongside general-purpose C/C++ control for configuration, monitoring, or slow-path handling. Zynq and Versal devices integrate hard ARM cores alongside FPGA fabric, eliminating the soft-processor resource cost.
+
+### Development board landscape
+
+For learning and prototyping before production Alveo/SmartNIC work:
+
+| Board | FPGA | Logic Elements | Price | Key Features |
+|-------|------|---------------|-------|--------------|
+| MAX1000 | Intel MAX10 | 2K–16K | ~$30 | 8MB SDRAM, ADC, accelerometer, UART, Arduino header |
+| CYC1000 | Intel Cyclone 10 LP | 25K | ~$30 | 8MB SDRAM, 8MB flash, accelerometer |
+| Arty A7-100T | AMD Artix-7 | 101K cells | ~$299 | 240 DSP, Ethernet, Pmod/Arduino connectors |
+| Basys 3 | AMD Artix-7 | — | ~$150 | 16 switches, 16 LEDs, 7-segment, VGA, good for coursework |
+| PYNQ-Z2 | Xilinx Zynq | 1.3M gates | ~$130 | ARM Cortex-A9 + FPGA, Python/Jupyter workflow |
+| USB104 A7 | AMD Artix-7 | 101K cells | ~$349 | SYZYGY expansion, USB-JTAG |
+| BeMicro MAX10 | Intel MAX10 | 8K | — | ADC, sensors, Arrow dev ecosystem |
+
 ## References
 
 - [An Accelerator for Decoding Market Data Based on FPGA](https://doi.org/10.1142/S0218126619500506)
 - [High Frequency Trading Acceleration Using FPGAs](https://doi.org/10.1109/FPL.2011.64)
 - [Acceleration of Trading System Back End with FPGAs Using HLS](https://www.mdpi.com/2079-9292/12/3/520)
 - [AMD Alveo SN1000 SmartNIC data sheet](https://docs.amd.com/api/khub/documents/rllO00cN~P_4HGlYrQWB6w/content)
+- [VHDPlus FPGA components and IDE](https://vhdplus.com/docs/components/overview/)
+- Dogan Ibrahim, *FPGA Programming and Hardware Essentials*, Elektor, 2024 (ISBN 978-3-89576-644-2)
 
 Related:
 

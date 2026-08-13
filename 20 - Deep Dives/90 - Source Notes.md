@@ -244,3 +244,67 @@ Related:
 - [[37 - Kernel Bypass Technologies Deep Dive]]
 - [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]
 - [[65 - HFT Rust System Design Master Note]]
+
+## VHDPlus FPGA Components Ecosystem
+
+Source:
+https://vhdplus.com/docs/components/overview/
+
+Notes captured:
+
+- VHDPlus provides an integrated FPGA development ecosystem with boards, extensions, and an IDE built around a simplified VHDL superset language.
+- Development boards include the Core MAX10 (entry-level, internal ADC, large RAM, flash, onboard USB programmer, Arduino-compatible processor), MAX1000 (most affordable option), CYC1000 (25,000 logic elements, external SDRAM, flash, accelerometer), and CYC5000.
+- Extensions use the CRUVI connector standard: Camera (CSI/HDMI for object detection), Motor (robotics/encoder), Audio (codec for signal processing), WiFi (ESP-01 for IoT), Level Shifter (5V compatibility), and Shield MAX10 (power supply, additional CRUVI connectors).
+- The VHDPlus IDE is a cross-platform development environment that includes a simulator, package manager, and support for NIOS II soft processor creation.
+- VHDPlus language is a superset of VHDL with simplified syntax, making it accessible for beginners while retaining full VHDL compatibility.
+- The ecosystem targets Intel/Altera MAX10 and Cyclone families, which are low-cost entry points for FPGA prototyping and learning.
+
+Related:
+
+- [[71 - FPGA Market Data Pipeline Deep Dive]]
+- [[74 - FPGA Feed Handlers and Inline Accelerators]]
+
+## FPGA Programming and Hardware Essentials (Ibrahim, 2024)
+
+Source:
+Dogan Ibrahim, *FPGA Programming and Hardware Essentials: Kick off with the MAX1000 and VHDPlus*, Elektor International Media, 2024. ISBN 978-3-89576-644-2 (print), 978-3-89576-645-9 (eBook).
+
+Preview accessed:
+https://content.e-bookshelf.de/media/reading/L-25769343-65fc4353a2.pdf
+
+Book structure noted:
+
+- Ch 1: FPGA introduction, FPGA types (SRAM-based, flash-based, anti-fuse), history (Altera EP300 1984, Xilinx XC2064 1985), development board survey
+- Ch 2: MAX1000 hardware (block diagram, clock, LEDs, buttons, accelerometer, Arduino/Pmod connectors, UART, power)
+- Ch 3: VHDPlus IDE installation, first program, downloading to FPGA, simulation
+- Ch 4: VHDPlus language (data types, operators, flow control, program template with Main/Process/Thread/Function)
+- Ch 5: Example projects (LEDs, counters, shift registers, flip-flops, multiplexers, 7-segment displays, debouncing)
+- Ch 6: Analog-to-Digital Converter (voltmeter, temperature sensor, LDR)
+- Ch 7: Serial communication (UART)
+- Ch 8: PWM (fixed duty cycle, mosquito repeller, dimming)
+- Ch 9: Ultrasonic sensor
+- Ch 10: I2C bus (port expander)
+- Ch 11: SPI bus (port expander)
+- Ch 12: LCD (HD44780)
+- Ch 13: Programming in VHDL (comparison with VHDPlus, VHDPlus-to-VHDL conversion)
+- Ch 14: MAX1000 FPGA Python programming
+- Ch 15: NIOS II soft processor (Arduino-compatible processor inside FPGA)
+- Ch 16: Accelerometer project
+- Ch 17: Other VHDPlus IDE projects
+- Ch 18: Quartus Prime Lite schematic design
+
+Notes captured:
+
+- The book surveys popular FPGA development boards with specifications: Artix-7 AC701 (~$1,500, 215K logic cells, 740 DSP slices), Spartan-7 SP701 (~$800, 102K logic cells), Arty A7-100T (~$299, 101K logic cells), USB104 A7 (~$349), BeMicro MAX10 (8K logic elements, ADC, sensors), MAX1000 (~$30, 2K-16K logic elements, 8MB SDRAM), iCE40-HX8K (~£30, 7,680 logic cells), PYNQ-Z2 (~£130, Zynq SoC with ARM Cortex-A9), Basys 3 (~£150, Artix-7), CYC1000 (~£30, 25K logic elements, Cyclone 10 LP).
+- FPGA market dominated by Intel/Altera, AMD/Xilinx, Lattice, Microchip, with smaller players like QuickLogic, Renesas, Flex Logix, and GOWIN.
+- Three FPGA configuration types: SRAM-based (volatile, must reload on power-up, good for prototyping), flash-based (non-volatile, instant-on), anti-fuse (one-time programmable, for defense/aerospace).
+- HDLs in use: VHDL, Verilog, VHDPlus, Python, C/C++. Design at behavioral level (abstract) or structural level (gate-level detail).
+- FPGA development workflow: describe in HDL, simulate, configure device, load code, test in real-time.
+- NIOS II is a soft processor that can be instantiated inside Intel FPGAs, enabling Arduino-compatible C/C++ programming alongside hardware logic — useful for hybrid designs combining hard real-time pipelines with general-purpose control.
+- MAX1000 board features relevant to HFT learning: 12 MHz oscillator with PLL to 100 MHz, 8MB SDRAM, ADC, UART, SPI, I2C, and accelerometer provide a low-cost platform for learning FPGA fundamentals before progressing to Alveo-class production hardware.
+
+Related:
+
+- [[71 - FPGA Market Data Pipeline Deep Dive]]
+- [[74 - FPGA Feed Handlers and Inline Accelerators]]
+- [[39 - Matching Engine Deployment, FPGA, DPDK, and Cloud Colocation]]

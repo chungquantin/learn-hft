@@ -13,6 +13,14 @@ Update this page every time new changes are made. Keep entries short, dated, and
 - Changed: reorganized pages, rewritten explanations, or renamed paths.
 - Fixed: corrected technical explanations, broken links, build issues, or project bugs.
 
+## 2026-08-13
+
+### Added
+
+- Expanded [FPGA Feed Handlers and Inline Accelerators](20%20-%20Deep%20Dives/74%20-%20FPGA%20Feed%20Handlers%20and%20Inline%20Accelerators.md) with FPGA architecture fundamentals: CLB/interconnect architecture, FPGA types (SRAM, flash, anti-fuse), vendor/family table, HDL languages, development workflow, soft processors (NIOS II, MicroBlaze, Zynq), and development board comparison table.
+- Expanded [FPGA Market Data Pipeline Deep Dive](20%20-%20Deep%20Dives/71%20-%20FPGA%20Market%20Data%20Pipeline%20Deep%20Dive.md) with HDL choices for pipeline development, soft processors in hybrid designs, FPGA interface protocols (AXI4-Stream, AXI4-Lite, PCIe DMA, GbE MAC), development boards, and configuration types.
+- Added source notes for [VHDPlus FPGA components ecosystem](https://vhdplus.com/docs/components/overview/) and Dogan Ibrahim's *FPGA Programming and Hardware Essentials* (Elektor, 2024) to [Source Notes](20%20-%20Deep%20Dives/90%20-%20Source%20Notes.md).
+
 ## 2026-08-11
 
 ### Added
