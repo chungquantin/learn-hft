@@ -13,6 +13,14 @@ Update this page every time new changes are made. Keep entries short, dated, and
 - Changed: reorganized pages, rewritten explanations, or renamed paths.
 - Fixed: corrected technical explanations, broken links, build issues, or project bugs.
 
+## 2026-08-13
+
+### Added
+
+- Expanded [FPGA Feed Handlers and Inline Accelerators](20%20-%20Deep%20Dives/74%20-%20FPGA%20Feed%20Handlers%20and%20Inline%20Accelerators.md) with comprehensive FPGA architecture fundamentals: internal structure diagram (LUTs, FFs, carry chains, DSP, BRAM, URAM, PLLs, transceivers), FPGA vs ASIC vs CPLD comparison, history (Altera EP300 1984, Xilinx XC2064 1985), expanded vendor/family table, HDL code examples (VHDL, Verilog, VHDPlus), VHDPlus IDE workflow and language features, detailed development board specs (MAX1000, Core MAX10, CYC1000, Arty A7, Basys 3, PYNQ-Z2, AC701, SP701, USB104, iCE40-HX8K, BeMicro MAX10), and VHDPlus extension ecosystem (Shield, Camera, Motor, Audio, WiFi, Level Shifter with component specs).
+- Expanded [FPGA Market Data Pipeline Deep Dive](20%20-%20Deep%20Dives/71%20-%20FPGA%20Market%20Data%20Pipeline%20Deep%20Dive.md) with resource mapping table (LUTs/FFs/BRAM/DSP per pipeline stage), clock domain crossing guidance, latency accounting breakdown (wire-to-event ~44–96 ns vs CPU ~5–50 µs), learning path from entry-level to production, detailed board specs, simulation/verification tool comparison table, AXI4 protocol details (TVALID/TREADY/TLAST handshaking), and PCIe DMA queue architecture.
+- Expanded [Source Notes](20%20-%20Deep%20Dives/90%20-%20Source%20Notes.md) with detailed VHDPlus component specs (Core MAX10, CYC1000 chip-level details, Shield MAX10 power architecture, Motor/Audio/Camera extension specs) and VHDPlus language syntax details.
+
 ## 2026-08-11
 
 ### Added
