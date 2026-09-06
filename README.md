@@ -1,8 +1,16 @@
-# Learn HFT
+# my-os
 
-This repository contains an Obsidian-based HFT learning vault, Rust implementation projects, and a Quartz site under `site/`.
+This repository contains a topic-organized Obsidian knowledge base, implementation projects, and a Quartz site under `site/`.
 
-The Markdown vault is the source of truth. The Quartz build synchronizes the learning folders into `site/content` before generating the website.
+The Markdown vault is the source of truth. Existing HFT notes live under `topics/hft/`; future subjects such as DevOps or econometrics can be added as sibling directories when their first notes are ready.
+
+```text
+00 - Start/          Vault-wide entry point
+topics/              Self-contained learning topics
+  hft/               Existing HFT knowledge graph
+projects/            Buildable code and project notes
+site/                Quartz publishing application
+```
 
 ## Useful commands
 
@@ -13,9 +21,17 @@ npm run build
 npm run serve
 ```
 
-Start with `00 - Start/02 - Knowledge Tree.md`. The technology curriculum and production construction path are in:
+Run the Telegram-to-PR capture backend:
 
-- `20 - Deep Dives/81 - Expert HFT Technology Curriculum.md`
-- `20 - Deep Dives/72 - Production Low-Latency Trading System Construction.md`
+```bash
+cargo run -p knowledge-capture-backend
+```
+
+See `projects/knowledge-capture-backend/README.md` for Telegram, GitHub, transcription, hosted vision, and capture-root configuration.
+
+Start with `00 - Start/README.md`, then enter a topic through `topics/README.md`. The HFT curriculum begins at:
+
+- `topics/hft/00 - Start/README.md`
+- `topics/hft/00 - Start/02 - Knowledge Tree.md`
 
 Generated Quartz output is intentionally not committed.

@@ -1,3 +1,30 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+body {
+  --myos-border: color-mix(in srgb, var(--gray) 35%, transparent);
+}
+
+.page-title a {
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+article h1:first-child {
+  letter-spacing: 0;
+}
+
+article a.internal {
+  text-underline-offset: 0.18rem;
+}
+
+article ul li::marker {
+  color: var(--secondary);
+}
+
+blockquote {
+  border-left-color: var(--secondary);
+}
+
+.popover {
+  border: 1px solid var(--myos-border);
+}

@@ -5,7 +5,17 @@ tags: [changelog, maintenance]
 
 # Changelog
 
-This page records meaningful changes to the Learn HFT vault and companion code.
+This page records meaningful changes to the my-os vault and companion code.
+
+## 2026-09-06
+
+- Renamed the repository and published site identity from Learn HFT to my-os.
+- Moved the existing HFT knowledge graph under `topics/hft/` so future subjects can use sibling topic directories.
+- Added topic-neutral vault and project indexes without creating speculative subject material.
+- Updated Quartz content sync for the new hierarchy and enabled the recent-notes sidebar.
+- Added the Rust `knowledge-capture-backend` project for Telegram text, voice, image, and audio capture into reviewable vault-update pull requests.
+- Added backend setup guidance for Telegram allowlists, GitHub PR publishing, local transcription, hosted vision, health checks, and retry endpoints.
+- Updated Quartz content sync so committed `.mdx` files and audio attachments can be published with capture source notes.
 
 Update this page every time new changes are made. Keep entries short, dated, and useful for future traversal:
 
@@ -20,14 +30,14 @@ Update this page every time new changes are made. Keep entries short, dated, and
 - Added this changelog page so future vault and project updates have a single visible history.
 - Linked the changelog from the Start pages so it is part of the normal navigation path.
 
-- Added the [HFT to AI Infrastructure Technology Transfer](30%20-%20Data%20and%20Research/48%20-%20HFT%20to%20AI%20Infrastructure%20Technology%20Transfer.md) research note.
-- Added the [Expert HFT Technology Curriculum](20%20-%20Deep%20Dives/81%20-%20Expert%20HFT%20Technology%20Curriculum.md).
+- Added the [HFT to AI Infrastructure Technology Transfer](topics/hft/30%20-%20Data%20and%20Research/48%20-%20HFT%20to%20AI%20Infrastructure%20Technology%20Transfer.md) research note.
+- Added the [Expert HFT Technology Curriculum](topics/hft/20%20-%20Deep%20Dives/81%20-%20Expert%20HFT%20Technology%20Curriculum.md).
 
 ### Changed
 
-- Consolidated duplicate low-latency and matching-engine notes into canonical deep dives: [Queues, Ring Buffers, and Backpressure](20%20-%20Deep%20Dives/24%20-%20Queues,%20Ring%20Buffers,%20and%20Backpressure.md), [Seqlocks Deep Dive](20%20-%20Deep%20Dives/23%20-%20Seqlocks%20Deep%20Dive.md), [Logging and Telemetry Deep Dive](20%20-%20Deep%20Dives/25%20-%20Logging%20and%20Telemetry%20Deep%20Dive.md), and [HFT Rust System Design Master Note](50%20-%20Interview%20Prep/65%20-%20HFT%20Rust%20System%20Design%20Master%20Note.md).
-- Expanded the technology curriculum with [InfiniBand and RDMA](20%20-%20Deep%20Dives/68%20-%20InfiniBand%20and%20RDMA%20Deep%20Dive.md), [DPDK](20%20-%20Deep%20Dives/69%20-%20DPDK%20Deep%20Dive.md), [Solarflare Onload and ef_vi](20%20-%20Deep%20Dives/70%20-%20Solarflare%20Onload%20and%20ef_vi%20Deep%20Dive.md), [FPGA Feed Handlers](20%20-%20Deep%20Dives/74%20-%20FPGA%20Feed%20Handlers%20and%20Inline%20Accelerators.md), [Hardware Timestamping and PTP](20%20-%20Deep%20Dives/75%20-%20Hardware%20Timestamping%20and%20PTP%20Deep%20Dive.md), [LMAX Disruptor](20%20-%20Deep%20Dives/77%20-%20LMAX%20Disruptor%20and%20Exchange%20Architecture.md), [CPU/NUMA/Memory](20%20-%20Deep%20Dives/78%20-%20CPU%20NUMA%20Memory%20and%20Compiler%20Deep%20Dive.md), [Performance Engineering and eBPF](20%20-%20Deep%20Dives/79%20-%20Performance%20Engineering%20and%20eBPF%20Deep%20Dive.md), and [SmartNIC/DPU Offload](20%20-%20Deep%20Dives/80%20-%20SmartNIC%20DPU%20and%20Network%20Offload%20Deep%20Dive.md).
-- Added the integrated [Production Low-Latency Trading System Construction](20%20-%20Deep%20Dives/72%20-%20Production%20Low-Latency%20Trading%20System%20Construction.md) guide and [HFT Technology Stack and Priority Map](20%20-%20Deep%20Dives/76%20-%20HFT%20Technology%20Stack%20and%20Priority%20Map.md).
+- Consolidated duplicate low-latency and matching-engine notes into canonical deep dives: [Queues, Ring Buffers, and Backpressure](topics/hft/20%20-%20Deep%20Dives/24%20-%20Queues,%20Ring%20Buffers,%20and%20Backpressure.md), [Seqlocks Deep Dive](topics/hft/20%20-%20Deep%20Dives/23%20-%20Seqlocks%20Deep%20Dive.md), [Logging and Telemetry Deep Dive](topics/hft/20%20-%20Deep%20Dives/25%20-%20Logging%20and%20Telemetry%20Deep%20Dive.md), and [HFT Rust System Design Master Note](topics/hft/50%20-%20Interview%20Prep/65%20-%20HFT%20Rust%20System%20Design%20Master%20Note.md).
+- Expanded the technology curriculum with [InfiniBand and RDMA](topics/hft/20%20-%20Deep%20Dives/68%20-%20InfiniBand%20and%20RDMA%20Deep%20Dive.md), [DPDK](topics/hft/20%20-%20Deep%20Dives/69%20-%20DPDK%20Deep%20Dive.md), [Solarflare Onload and ef_vi](topics/hft/20%20-%20Deep%20Dives/70%20-%20Solarflare%20Onload%20and%20ef_vi%20Deep%20Dive.md), [FPGA Feed Handlers](topics/hft/20%20-%20Deep%20Dives/74%20-%20FPGA%20Feed%20Handlers%20and%20Inline%20Accelerators.md), [Hardware Timestamping and PTP](topics/hft/20%20-%20Deep%20Dives/75%20-%20Hardware%20Timestamping%20and%20PTP%20Deep%20Dive.md), [LMAX Disruptor](topics/hft/20%20-%20Deep%20Dives/77%20-%20LMAX%20Disruptor%20and%20Exchange%20Architecture.md), [CPU/NUMA/Memory](topics/hft/20%20-%20Deep%20Dives/78%20-%20CPU%20NUMA%20Memory%20and%20Compiler%20Deep%20Dive.md), [Performance Engineering and eBPF](topics/hft/20%20-%20Deep%20Dives/79%20-%20Performance%20Engineering%20and%20eBPF%20Deep%20Dive.md), and [SmartNIC/DPU Offload](topics/hft/20%20-%20Deep%20Dives/80%20-%20SmartNIC%20DPU%20and%20Network%20Offload%20Deep%20Dive.md).
+- Added the integrated [Production Low-Latency Trading System Construction](topics/hft/20%20-%20Deep%20Dives/72%20-%20Production%20Low-Latency%20Trading%20System%20Construction.md) guide and [HFT Technology Stack and Priority Map](topics/hft/20%20-%20Deep%20Dives/76%20-%20HFT%20Technology%20Stack%20and%20Priority%20Map.md).
 
 ### Verified
 

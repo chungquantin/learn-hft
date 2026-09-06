@@ -1,4 +1,12 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs"
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -7,14 +15,7 @@ const siteDir = path.resolve(scriptDir, "..")
 const vaultDir = path.resolve(siteDir, "..")
 const contentDir = path.join(siteDir, "content")
 
-const vaultFolders = [
-  "00 - Start",
-  "10 - Foundations",
-  "20 - Deep Dives",
-  "30 - Data and Research",
-  "40 - Ops and Frontend",
-  "50 - Interview Prep",
-]
+const vaultFolders = ["00 - Start", "topics"]
 
 const assetExtensions = new Set([
   ".avif",
@@ -37,7 +38,12 @@ function copySelectedFiles(from, to) {
   const stats = statSync(from)
   if (stats.isDirectory()) {
     for (const entry of readdirSync(from)) {
-      if (entry === ".git" || entry === ".obsidian" || entry === "node_modules" || entry === "target") {
+      if (
+        entry === ".git" ||
+        entry === ".obsidian" ||
+        entry === "node_modules" ||
+        entry === "target"
+      ) {
         continue
       }
 
@@ -67,28 +73,29 @@ copySelectedFiles(path.join(vaultDir, "projects"), path.join(contentDir, "projec
 writeFileSync(
   path.join(contentDir, "index.md"),
   `---
-title: Learn HFT
+title: my-os
+tags: [index, my-os]
 ---
 
-# Learn HFT
+# my-os
 
-A public knowledge site for high-frequency trading systems, Rust implementation work, market microstructure, data infrastructure, operations, and interview preparation.
+A topic-organized knowledge base for technical learning and implementation projects.
 
 ## Start Here
 
-- [[00 - Start/00 - Roadmap|Roadmap]]
-- [[00 - Start/01 - HFT Map|HFT Map]]
-- [[00 - Start/02 - Knowledge Tree|Knowledge Tree]]
-- [[00 - Start/08 - Build Projects|Build Projects]]
-- [[00 - Start/13 - System Design Map|System Design Map]]
+- [[00 - Start/README|Vault Home]]
+- [[topics/README|Topics]]
+- [[projects/README|Projects]]
 
-## Main Areas
+## Current Topics
 
-- [[10 - Foundations/99 - Glossary|Foundations]]
-- [[20 - Deep Dives/20 - Detailed Guides|Deep Dives]]
-- [[30 - Data and Research/40 - Data Systems Hub|Data and Research]]
-- [[40 - Ops and Frontend/50 - Frontend and Operator Systems Hub|Ops and Frontend]]
-- [[50 - Interview Prep/61 - HFT Interview Drills and Portfolio Packaging|Interview Prep]]
+- [[topics/hft/00 - Start/README|High-Frequency Trading]]
+
+## HFT Paths
+
+- [[topics/hft/00 - Start/02 - Knowledge Tree|Knowledge Tree]]
+- [[topics/hft/20 - Deep Dives/81 - Expert HFT Technology Curriculum|Expert HFT Technology Curriculum]]
+- [[topics/hft/20 - Deep Dives/72 - Production Low-Latency Trading System Construction|Production Low-Latency System Construction]]
 `,
 )
 

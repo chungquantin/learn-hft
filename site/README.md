@@ -1,4 +1,4 @@
-# Learn HFT Quartz Site
+# my-os Quartz Site
 
 This directory contains the Quartz site used to publish the Obsidian vault in the repository root.
 

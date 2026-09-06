@@ -5,7 +5,7 @@ tags: [index, learning-path, knowledge-tree]
 
 # Knowledge Tree
 
-This page is the traversal map for the vault. Use it when the flat index feels too noisy.
+This page is the traversal map for the HFT topic. Use it when the flat index feels too noisy.
 
 The best path is not strictly linear. The right mental model is a tree with a few trunks: market structure, quant research, system design, implementation, latency infrastructure, and operations.
 
@@ -164,7 +164,6 @@ If you are building now:
 12. Add SmartNIC/DPU and network offload knowledge with [[80 - SmartNIC DPU and Network Offload Deep Dive]].
 13. Follow [[81 - Expert HFT Technology Curriculum]] as the complete progression.
 14. Add research realism with [[47 - Quant Topics for HFT Research]], [[42 - Research and Backtesting Systems]], and [[45 - Analytics and Post-Trade Review]].
-
 Related:
 
 - [[00 - Roadmap]]

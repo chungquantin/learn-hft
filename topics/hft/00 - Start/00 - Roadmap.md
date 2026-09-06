@@ -5,7 +5,7 @@ tags: [roadmap, learning]
 
 # Roadmap
 
-This vault is designed as a progression from intuition to systems thinking to implementation. The goal is not simply to collect facts about HFT, Rust, and perpetuals. The goal is to build understanding in the right order, so that later technical details attach themselves to a stable mental model instead of becoming isolated fragments.
+This topic is designed as a progression from intuition to systems thinking to implementation. The goal is not simply to collect facts about HFT, Rust, and perpetuals. The goal is to build understanding in the right order, so that later technical details attach themselves to a stable mental model instead of becoming isolated fragments.
 
 The first stage is about building the basic shape of the domain. Before worrying about concurrency models, queue design, or exchange protocol quirks, it helps to understand what makes HFT different from slower forms of trading and what makes perpetual futures different from both spot markets and dated futures. This is where you should develop a feel for the market itself: how prices are formed at short horizons, why order flow matters, why leverage changes the problem, and why exchange mechanics are part of the market rather than background implementation detail.
 

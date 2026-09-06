@@ -1,15 +1,15 @@
 {
-  "name": "@jackyzha0/quartz",
-  "description": "🌱 publish your digital garden and notes as a website",
+  "name": "my-os",
+  "description": "Personal knowledge OS published with Quartz",
   "private": true,
   "version": "5.0.0",
   "type": "module",
   "author": "jackyzha0 <j.zhao2k19@gmail.com>",
   "license": "MIT",
-  "homepage": "https://quartz.jzhao.xyz",
+  "homepage": "https://chungquantin.github.io/my-os",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jackyzha0/quartz.git"
+    "url": "https://github.com/chungquantin/my-os.git"
   },
   "scripts": {
     "quartz": "./quartz/bootstrap-cli.mjs",
